@@ -2,7 +2,13 @@
 
 ## Introducción
 
-Un mismo número puede representarse en distintas bases numéricas.
+En informática, un mismo valor puede representarse utilizando distintos sistemas numéricos. Los más importantes son:
+
+- **Decimal (base 10)** → sistema usado habitualmente por las personas.  
+- **Binario (base 2)** → sistema usado por los ordenadores.  
+- **Hexadecimal (base 16)** → representación compacta muy usada en informática.
+
+Ejemplo de equivalencia:
 
 | Decimal | Binario | Hexadecimal |
 |--------|---------|-------------|
@@ -10,50 +16,94 @@ Un mismo número puede representarse en distintas bases numéricas.
 | 15 | 1111 | F |
 | 255 | 11111111 | FF |
 
-Estas conversiones son fundamentales en:
-
-- Redes  
-- Programación  
-- Criptografía  
-- Sistemas Operativos  
-- Ciberseguridad  
+Comprender estas conversiones es fundamental para redes, programación, criptografía y ciberseguridad.
 
 ---
 
 # 1. Binario → Decimal
 
-## Método
+## ¿Qué estamos haciendo?
 
-Multiplicar cada bit por su potencia de 2 correspondiente.
+Convertimos un número escrito en base 2 al sistema decimal (base 10).
 
-## Ejemplo
+Ejemplo:
 
-1011₂
+`1011₂`
 
-| Bit | Potencia | Valor |
-|----|----------|------|
-| 1 | 2³ | 8 |
-| 0 | 2² | 0 |
-| 1 | 2¹ | 2 |
-| 1 | 2⁰ | 1 |
+## ¿Por qué usamos potencias de 2?
 
-8 + 0 + 2 + 1 = 11
+Porque cada posición binaria representa una potencia de 2.
 
-### Resultado
+| Posición | Valor |
+|---------|------|
+| 2⁰ | 1 |
+| 2¹ | 2 |
+| 2² | 4 |
+| 2³ | 8 |
+| 2⁴ | 16 |
+| 2⁵ | 32 |
+| 2⁶ | 64 |
+| 2⁷ | 128 |
 
-1011₂ = 11₁₀
+## Ejemplo resuelto
+
+`1011₂`
+
+| Bit | Valor |
+|----|------|
+| 1 | 8 |
+| 0 | 0 |
+| 1 | 2 |
+| 1 | 1 |
+
+Suma:
+
+`8 + 0 + 2 + 1 = 11`
+
+### Resultado final
+
+`1011₂ = 11₁₀`
+
+## Truco rápido
+
+Escribe mentalmente:
+
+`16   8   4   2   1`
+
+Si el número es:
+
+`1    1   0   0   1`
+
+Solo sumas donde haya **1**:
+
+`16 + 8 + 1 = 25`
+
+Resultado:
+
+`11001₂ = 25₁₀`
+
+## ¿Por qué funciona?
+
+Cada bit en **1** activa ese valor.  
+Cada bit en **0** lo ignora.
+
+## Error común
+
+No empezar desde la derecha.
 
 ---
 
 # 2. Decimal → Binario
 
-## Método
+## ¿Qué estamos haciendo?
 
-Divisiones sucesivas entre 2.
+Pasamos decimal a binario.
 
-## Ejemplo
+Ejemplo:
 
-13₁₀
+`13₁₀`
+
+## Método clásico
 
 | División | Cociente | Resto |
 |---------|----------|------|
@@ -62,13 +112,43 @@ Divisiones sucesivas entre 2.
 | 3 ÷ 2 | 1 | 1 |
 | 1 ÷ 2 | 0 | 1 |
 
-Leer restos de abajo hacia arriba:
+Leer restos de abajo arriba:
 
-1101₂
+`1101₂`
 
-### Resultado
+### Resultado final
 
-13₁₀ = 1101₂
+`13₁₀ = 1101₂`
+
+## Truco rápido
+
+Buscar potencias de 2:
+
+`25₁₀`
+
+`16 cabe → 1`
+
+Queda `9`
+
+`8 cabe → 1`
+
+Queda `1`
+
+`4 no cabe → 0`
+
+`2 no cabe → 0`
+
+`1 sí cabe → 1`
+
+Resultado:
+
+`11001₂`
+
+## ¿Por qué funciona?
+
+Todo número decimal puede escribirse como suma de potencias de 2.
+
+`25 = 16 + 8 + 1`
 
 ---
 
@@ -76,9 +156,9 @@ Leer restos de abajo hacia arriba:
 
 ## Método
 
-Divisiones sucesivas entre 16.
+Dividir entre 16.
 
-## Equivalencias
+## Tabla rápida
 
 | Decimal | Hex |
 |--------|-----|
@@ -91,17 +171,15 @@ Divisiones sucesivas entre 16.
 
 ## Ejemplo
 
-58₁₀
+`58₁₀`
 
-| División | Cociente | Resto |
-|---------|----------|------|
-| 58 ÷ 16 | 3 | 10 |
+`58 ÷ 16 = 3 resto 10`
 
-10 = A
+`10 = A`
 
-### Resultado
+Resultado:
 
-58₁₀ = 3A₁₆
+`3A₁₆`
 
 ---
 
@@ -109,22 +187,19 @@ Divisiones sucesivas entre 16.
 
 ## Método
 
-Multiplicar cada dígito por potencias de 16.
+Potencias de 16.
 
-## Ejemplo
+Ejemplo:
 
-A8₁₆
+`A8₁₆`
 
-| Dígito | Valor | Operación |
-|------|------|-----------|
-| A | 10 | 10 × 16¹ |
-| 8 | 8 | 8 × 16⁰ |
+`A = 10`
 
-160 + 8 = 168
+`(10 × 16) + 8 = 168`
 
-### Resultado
+Resultado:
 
-A8₁₆ = 168₁₀
+`A8₁₆ = 168₁₀`
 
 ---
 
@@ -132,18 +207,19 @@ A8₁₆ = 168₁₀
 
 ## Método
 
-Agrupar en bloques de 4 bits.
+Agrupar de 4 en 4.
 
-## Ejemplo
+Ejemplo:
 
-10101111₂
+`10101111₂`
 
-1010   1111  
- A      F
+`1010   1111`
 
-### Resultado
+`A      F`
 
-10101111₂ = AF₁₆
+Resultado:
+
+`AF₁₆`
 
 ---
 
@@ -151,20 +227,19 @@ Agrupar en bloques de 4 bits.
 
 ## Método
 
-Sustituir cada dígito por 4 bits.
+Cada dígito = 4 bits.
 
-## Ejemplo
+Ejemplo:
 
-3C₁₆
+`3C₁₆`
 
-| Hex | Binario |
-|----|---------|
-| 3 | 0011 |
-| C | 1100 |
+`3 = 0011`
 
-### Resultado
+`C = 1100`
 
-3C₁₆ = 00111100₂
+Resultado:
+
+`00111100₂`
 
 ---
 
@@ -176,20 +251,20 @@ Sustituir cada dígito por 4 bits.
 | Decimal → Binario | Divisiones entre 2 |
 | Decimal → Hexadecimal | Divisiones entre 16 |
 | Hexadecimal → Decimal | Potencias de 16 |
-| Binario → Hexadecimal | Bloques de 4 bits |
+| Binario → Hexadecimal | Grupos de 4 bits |
 | Hexadecimal → Binario | Sustitución directa |
 
 ---
 
-# Para Examen Memoriza
+# Para Memorizar
 
-2 = Binario  
-10 = Decimal  
-16 = Hexadecimal  
-4 bits = 1 Hex
+- Base 2 = Binario  
+- Base 10 = Decimal  
+- Base 16 = Hexadecimal  
+- 1 Hex = 4 bits
 
 ---
 
 # Conclusión
 
-Dominar conversiones numéricas facilita el trabajo en redes, criptografía, análisis digital y programación.
+Dominar conversiones es esencial para informática, redes y ciberseguridad.
