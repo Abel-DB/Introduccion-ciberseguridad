@@ -3,54 +3,130 @@
 
 ## Introducción
 
-En este laboratorio se configuró una campaña educativa y controlada de phishing utilizando:
+Este laboratorio muestra la creación de una **campaña de phishing controlada y autorizada** utilizando herramientas reales en entorno local. Se desarrolló con fines educativos para comprender cómo operan este tipo de ataques y cómo defenderse frente a ellos. :contentReference[oaicite:0]{index=0}
 
-- **GoPhish** → Plataforma para campañas simuladas  
-- **MailHog** → Servidor SMTP local para pruebas  
-- **Linux** → Sistema operativo de trabajo  
+Tecnologías utilizadas:
 
-Escenario utilizado:
+- **GoPhish** → Plataforma profesional para simulaciones de phishing  
+- **MailHog** → Servidor SMTP local de pruebas  
+- **Linux** → Sistema operativo del laboratorio  
+- **Go** → Lenguaje necesario para compilar e instalar herramientas
+
+Escenario simulado:
 
 ```text
 Banco Andino Digital
 ```
 
-El objetivo es comprender cómo funcionan campañas de phishing desde una perspectiva defensiva y académica.
+---
+
+# Conceptos Fundamentales
+
+## ¿Qué es Phishing?
+
+El **phishing** es una técnica de ataque en la que un atacante suplanta una entidad confiable para engañar a una víctima y lograr que entregue:
+
+- Credenciales
+- Información bancaria
+- Datos personales
+- Acceso corporativo
+
+Normalmente se realiza por:
+
+- Correo electrónico
+- SMS
+- Redes sociales
+- Sitios web falsos
 
 ---
 
-# Objetivos
+## ¿Qué es Ingeniería Social?
+
+La **ingeniería social** consiste en manipular psicológicamente a una persona para que tome decisiones inseguras.
+
+Ejemplos comunes:
+
+- Crear urgencia
+- Simular autoridad
+- Generar miedo
+- Prometer recompensas
+- Pedir verificación inmediata
+
+El phishing es una forma de ingeniería social.
+
+---
+
+## ¿Qué es una Campaña de Phishing?
+
+Una **campaña** es una operación organizada que incluye:
+
+- Lista de víctimas objetivo
+- Correos personalizados
+- Enlaces maliciosos
+- Landing pages falsas
+- Captura de datos
+- Seguimiento de resultados
+
+En ciberseguridad defensiva se simulan campañas para medir riesgos humanos.
+
+---
+
+## ¿Qué es GoPhish?
+
+**GoPhish** es una plataforma open source diseñada para crear campañas de phishing simuladas de forma ética y autorizada.
+
+Permite:
+
+- Enviar correos de prueba
+- Diseñar plantillas HTML
+- Crear páginas falsas controladas
+- Registrar clics
+- Registrar formularios enviados
+- Medir comportamiento de usuarios
+
+---
+
+## ¿Qué es MailHog?
+
+**MailHog** es un servidor SMTP local de pruebas.
+
+Su función es:
+
+- Recibir correos localmente
+- No enviar correos reales a Internet
+- Ver mensajes desde navegador
+- Probar campañas sin riesgo externo
+
+Ideal para laboratorios.
+
+---
+
+# Objetivos del Laboratorio
 
 Aprender a configurar:
 
-- Instalación de GoPhish
-- Instalación de MailHog
-- Perfil SMTP
-- Landing Page falsa controlada
-- Plantilla de correo
-- Grupo de usuarios
-- Lanzamiento de campaña
+- GoPhish
+- MailHog
+- Perfiles SMTP
+- Landing pages
+- Plantillas HTML
+- Grupos de usuarios
+- Campañas completas
 - Resultados y métricas
 
 ---
 
 # Requisitos Previos
 
-## Tener instalado Go
+## Instalar Go
 
-Tanto GoPhish compilado desde código fuente como MailHog requieren Go instalado.
-
-Verificar:
+Verificar instalación:
 
 ```bash
 go version
 ```
 
-Si muestra versión, está listo y si no.
-
-Instalar:
-
-EndeavourOS
+Si no está instalado (Arch / EndeavourOS):
 
 ```bash
 sudo pacman -S go
@@ -62,13 +138,11 @@ sudo pacman -S go
 
 ---
 
-## 1. Descargar repositorio oficial
+## 1. Descargar Código Fuente
 
 ```bash
 git clone https://github.com/gophish/gophish.git
 ```
-
-Enlace: https://github.com/gophish/gophish
 
 ### Explicación
 
@@ -79,29 +153,21 @@ Enlace: https://github.com/gophish/gophish
 
 ---
 
-## 2. Entrar a carpeta
+## 2. Entrar al Directorio
 
 ```bash
 cd gophish
 ```
 
-### Explicación
-
-| Comando | Función |
-|--------|--------|
-| `cd` | Cambiar directorio |
-
 ---
 
-## 3. Compilar
+## 3. Compilar Proyecto
 
 ```bash
 go build
 ```
 
-### Explicación
-
-Compila el proyecto y genera el ejecutable:
+Esto genera el binario:
 
 ```text
 gophish
@@ -109,13 +175,13 @@ gophish
 
 ---
 
-## 4. Ejecutar GoPhish
+## 4. Ejecutar
 
 ```bash
 sudo ./gophish
 ```
 
-### Resultado esperado
+Salida esperada:
 
 ```text
 Starting admin server at https://127.0.0.1:3333
@@ -127,21 +193,15 @@ Starting admin server at https://127.0.0.1:3333
 
 ---
 
-## 1. Instalar MailHog
+## 1. Instalar
 
 ```bash
 go install github.com/mailhog/MailHog@latest
 ```
 
-Enlace: https://github.com/mailhog/mailhog
-
-### Explicación
-
-Descarga y compila MailHog usando Go.
-
 ---
 
-## 2. Verificar binario
+## 2. Verificar Binario
 
 ```bash
 ls ~/go/bin/
@@ -155,31 +215,18 @@ MailHog
 
 ---
 
-## 3. Ejecutar MailHog
+## 3. Ejecutar
 
 ```bash
 ~/go/bin/MailHog
 ```
 
-### Servicios normales
+Servicios:
 
 | Servicio | Dirección |
 |---------|----------|
 | SMTP | 127.0.0.1:1025 |
 | Web UI | http://127.0.0.1:8025 |
-
----
-
-# ¿Qué es MailHog?
-
-Servidor de correo falso para pruebas.
-
-Permite:
-
-- Recibir emails localmente
-- No enviar correos reales
-- Ver bandeja de entrada de pruebas
-- Simular campañas seguras
 
 ---
 
@@ -198,13 +245,25 @@ Ingresar con:
 
 ---
 
-# Configuración de Campaña
+# Estructura de GoPhish
+
+GoPhish organiza campañas en este orden lógico:
+
+1. Sending Profiles  
+2. Landing Pages  
+3. Email Templates  
+4. Users & Groups  
+5. Campaigns  
 
 ---
 
-# 1️⃣ Sending Profiles
+# 1. Sending Profiles
 
-## New Profile
+## ¿Qué es?
+
+Define **cómo se enviarán los correos**.
+
+## Configuración
 
 | Campo | Valor |
 |------|------|
@@ -217,21 +276,13 @@ Ingresar con:
 
 ---
 
-## Explicación
+# 2. Landing Pages
 
-MailHog usa SMTP:
+## ¿Qué es?
 
-```text
-127.0.0.1:1025
-```
+Página web falsa que simula el portal legítimo.
 
-No requiere autenticación real.
-
----
-
-# 2️⃣ Landing Pages
-
-## New Landing Page
+## Configuración
 
 | Campo | Valor |
 |------|------|
@@ -246,37 +297,46 @@ No requiere autenticación real.
 
 ```html
 <div style="font-family:Arial;background:#eef2f7;padding:40px;">
-        <div style="max-width:430px;margin:auto;background:white;padding:30px;border:1px solid #ddd;">
-            <h2 style="color:#0A2E5D;text-align:center;">
-                🏦 Banco Andino Digital
-            </h2>
-            <p style="text-align:center;">
-                Verificación de Seguridad
-            </p>
+  <div style="max-width:430px;margin:auto;background:white;padding:30px;border:1px solid #ddd;">
 
-            <form method="POST">
-                <p>Usuario</p>
-                <input type="text" name="username" style="width:100%;padding:10px;">
+    <h2 style="color:#0A2E5D;text-align:center;">
+      Banco Andino Digital
+    </h2>
 
-                <p>Contraseña</p>
-                <input type="password" name="password" style="width:100%;padding:10px;">
+    <p style="text-align:center;">
+      Verificación de Seguridad
+    </p>
 
-                <br><br>
+    <form method="POST">
 
-                <button type="submit" style="width:100%;padding:12px;background:#0055CC;color:white;border:none;">
-                    Ingresar
-                </button>
-            </form>
+      <p>Usuario</p>
+      <input type="text" name="username" style="width:100%;padding:10px;">
 
-        </div>
+      <p>Contraseña</p>
+      <input type="password" name="password" style="width:100%;padding:10px;">
+
+      <br><br>
+
+      <button type="submit"
+      style="width:100%;padding:12px;background:#0055CC;color:white;border:none;">
+      Ingresar
+      </button>
+
+    </form>
+
+  </div>
 </div>
 ```
 
 ---
 
-# 3️⃣ Email Templates
+# 3. Email Templates
 
-## New Template
+## ¿Qué es?
+
+Correo falso que atraerá al usuario para hacer clic.
+
+## Configuración
 
 | Campo | Valor |
 |------|------|
@@ -288,45 +348,50 @@ No requiere autenticación real.
 ## HTML Utilizado
 
 ```html
-
 <div style="font-family:Arial;padding:30px;background:#f4f6f8;">
-    <div style="max-width:600px;margin:auto;background:white;padding:30px;border:1px solid #ddd;">
+  <div style="max-width:600px;margin:auto;background:white;padding:30px;border:1px solid #ddd;">
 
-        <h2 style="color:#0A2E5D;">🏦 Banco Andino Digital</h2>
+    <h2 style="color:#0A2E5D;">
+      Banco Andino Digital
+    </h2>
 
-        <p>Estimado {{.FirstName}},</p>
+    <p>Estimado {{.FirstName}},</p>
 
-        <p>Detectamos un acceso desde un dispositivo no habitual.</p>
+    <p>Detectamos un acceso desde un dispositivo no habitual.</p>
 
-        <p>Por seguridad, valide su identidad en las próximas 24 horas.</p>
+    <p>Por seguridad, valide su identidad en las próximas 24 horas.</p>
 
-        <p style="text-align:center;margin:30px 0;">
-            <a href="{{.URL}}" style="background:#0055CC;color:white;padding:14px 24px;text-decoration:none;">
-                Verificar Cuenta
-            </a>
-        </p>
+    <p style="text-align:center;margin:30px 0;">
+      <a href="{{.URL}}"
+      style="background:#0055CC;color:white;padding:14px 24px;text-decoration:none;">
+      Verificar Cuenta
+      </a>
+    </p>
 
-        <p>Si reconoce esta actividad, ignore este mensaje.</p>
+    <p>Si reconoce esta actividad, ignore este mensaje.</p>
 
-    </div>
+  </div>
 </div>
 ```
 
 ---
 
-## Explicación
+## Variables Importantes
 
-```text
-{{.URL}}
-```
-
-Variable automática de GoPhish que inserta el enlace de campaña.
+| Variable | Función |
+|--------|--------|
+| `{{.URL}}` | Link de campaña |
+| `{{.FirstName}}` | Nombre usuario |
 
 ---
 
-# 4️⃣ Users & Groups
+# 4. Users & Groups
 
-## New Group
+## ¿Qué es?
+
+Lista de objetivos simulados.
+
+## Configuración
 
 | Campo | Valor |
 |------|------|
@@ -339,13 +404,15 @@ Juan | Perez | juan@gmail.com | Cliente
 Maria | Lopez | maria@gmail.com | Gerente
 ```
 
-También puedes usar solo tu correo.
-
 ---
 
-# 5️⃣ Campaigns
+# 5. Campaigns
 
-## New Campaign
+## ¿Qué es?
+
+Une todos los componentes anteriores y ejecuta la simulación.
+
+## Configuración
 
 | Campo | Valor |
 |------|------|
@@ -359,39 +426,34 @@ También puedes usar solo tu correo.
 
 ---
 
-## Ejemplo URL
+# Flujo de Ataque Simulado
 
 ```text
-http://192.168.1.15
-```
-
----
-
-# Flujo de la Simulación
-
-```text
-Correo Banco Andino
+Correo Fraudulento
         ↓
-Usuario hace clic
+Usuario Abre Email
         ↓
-Landing Page falsa
+Hace Clic
         ↓
-Captura de datos
+Landing Page Falsa
         ↓
-Redirección Google
+Envía Credenciales
+        ↓
+Redirección
 ```
 
 ---
 
 # Resultados en GoPhish
 
-Puedes visualizar:
+Permite ver:
 
 - Emails enviados
 - Emails abiertos
-- Clics realizados
-- Formularios enviados
-- Hora exacta
+- Clics
+- Datos enviados
+- Horarios
+- Tasa de éxito
 
 ---
 
@@ -403,20 +465,39 @@ Abrir:
 http://127.0.0.1:8025
 ```
 
-Verás los correos recibidos.
+Bandeja de entrada local de pruebas.
 
 ---
 
-# Comandos Utilizados
+# Riesgos Reales que Simula
 
-| Comando | Función |
-|--------|--------|
-| `git clone` | Descargar código |
-| `cd` | Entrar carpeta |
-| `go build` | Compilar |
-| `sudo ./gophish` | Ejecutar |
-| `go install` | Instalar MailHog |
-| `ls` | Ver archivos |
+- Robo de credenciales
+- Acceso inicial atacante
+- Fraude bancario
+- Compromiso corporativo
+- Movimiento lateral
+
+---
+
+# Lo que Aprendes
+
+- Ingeniería social realista
+- Diseño de correos falsos
+- Landing pages fraudulentas
+- SMTP básico
+- Concienciación de usuarios
+- Métricas humanas
+- Defensa organizacional
+
+---
+
+# Buenas Prácticas
+
+- Solo usar entornos autorizados
+- No enviar campañas reales sin permiso
+- Medir resultados éticamente
+- Capacitar después de pruebas
+- Mejorar políticas internas
 
 ---
 
@@ -426,43 +507,22 @@ Verás los correos recibidos.
 
 No compila.
 
+## SMTP mal configurado
+
+No salen correos.
+
 ## URL incorrecta
 
 Links rotos.
 
-## No abrir MailHog
+## No revisar métricas
 
-No llegan correos visibles.
-
-## No cambiar clave admin
-
-Mala práctica.
-
----
-
-# Buenas Prácticas
-
-- Solo laboratorios autorizados
-- Correos propios de prueba
-- Medir resultados
-- Formar usuarios luego
-- Mejorar awareness
-
----
-
-# Lo que Aprendes
-
-- Funcionamiento real phishing
-- SMTP básico
-- Landing pages
-- Ingeniería social
-- Métricas humanas
-- Seguridad ofensiva ética
+Se pierde valor del ejercicio.
 
 ---
 
 # Conclusión
 
-GoPhish + MailHog forman un laboratorio excelente para aprender phishing de forma segura y profesional.
+GoPhish + MailHog permiten construir uno de los mejores laboratorios para comprender el phishing moderno desde la defensa.
 
-Permiten comprender cómo operan campañas reales y cómo defender mejor a usuarios y organizaciones.
+No solo enseñan tecnología, también muestran que el factor humano sigue siendo una de las superficies de ataque más importantes en ciberseguridad.
