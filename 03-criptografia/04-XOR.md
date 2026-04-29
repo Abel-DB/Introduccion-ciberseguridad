@@ -1,150 +1,158 @@
-XOR en Criptografía
+# XOR en Criptografía
 
 ## Introducción
 
-XOR significa Exclusive OR (O exclusivo).
+**XOR** significa **Exclusive OR** (O exclusivo).
 
-Es una operación lógica muy importante en informática, programación y criptografía.
+Es una operación lógica fundamental en informática, programación y criptografía.
 
-Se utiliza para:
+Se usa en:
 
 - Cifrado simple
+- Algoritmos modernos
+- Malware
+- Ingeniería inversa
 - Operaciones binarias
-- Malware analysis
-- Hashing
-- Stream ciphers
-- Seguridad informática
+- CTFs
 
-Aunque parece sencilla, XOR es extremadamente poderosa.
-
---------------------------------------------------
+---
 
 ## 1. ¿Qué hace XOR?
 
-Compara dos bits.
+Compara dos bits:
 
-Bit A | Bit B | Resultado
+- `1` si son diferentes
+- `0` si son iguales
+
+### Tabla XOR
+
+A | B | XOR
+--|---|----
 0 | 0 | 0
 0 | 1 | 1
 1 | 0 | 1
 1 | 1 | 0
 
-Regla rápida:
+### Regla rápida
 
-Iguales = 0
+Iguales = 0  
 Diferentes = 1
 
---------------------------------------------------
+---
 
 ## 2. ¿Por qué es importante?
 
-Porque permite mezclar datos con una clave y luego recuperarlos usando la misma clave.
+Permite mezclar datos con una clave y recuperar luego el valor original usando la misma clave.
 
-Eso la convierte en base de muchos sistemas criptográficos modernos.
-
---------------------------------------------------
+---
 
 ## 3. Ejemplo simple con bits
 
-1010
-1100
-----
+1010  
+1100  
+----  
 0110
 
-Paso a paso:
+### Paso a paso
 
-1 XOR 1 = 0
-0 XOR 1 = 1
-1 XOR 0 = 1
-0 XOR 0 = 0
+A | B | XOR
+--|---|----
+1 | 1 | 0
+0 | 1 | 1
+1 | 0 | 1
+0 | 0 | 0
 
-Resultado:
+### Resultado final
 
-0110
+`0110`
 
---------------------------------------------------
+---
 
-## 4. Propiedad mágica de XOR
-
-Si aplicas XOR dos veces con la misma clave, recuperas el original.
+## 4. Propiedad principal
 
 Dato XOR Clave = Cifrado
 
 Cifrado XOR Clave = Dato original
 
---------------------------------------------------
+Esto hace que XOR sea reversible.
+
+---
 
 ## 5. Ejemplo criptográfico
 
 Dato original:
 
-1011
+`1011`
 
 Clave:
 
-1100
+`1100`
 
-Cifrado:
+### Cifrado
 
-1011
-1100
-----
+1011  
+1100  
+----  
 0111
-
-Recuperación:
-
-0111
-1100
-----
-1011
 
 Resultado:
 
-Dato original restaurado.
+`0111`
 
---------------------------------------------------
+### Descifrado
+
+0111  
+1100  
+----  
+1011
+
+Dato recuperado:
+
+`1011`
+
+---
 
 ## 6. ¿Por qué funciona?
 
-0 XOR 0 = 0
-1 XOR 1 = 0
-X XOR 0 = X
+0 XOR 0 = 0  
+1 XOR 1 = 0  
+X XOR 0 = X  
 X XOR X = 0
 
 Y especialmente:
 
-A XOR B XOR B = A
+`A XOR B XOR B = A`
 
---------------------------------------------------
+---
 
 ## 7. XOR con texto
 
-Supongamos letra:
+Letra:
 
-A
+`A`
 
 ASCII:
 
-01000001
+`01000001`
 
 Clave:
 
-00000001
+`00000001`
 
 Aplicando XOR:
 
-01000001
-00000001
---------
+01000001  
+00000001  
+--------  
 01000000
 
 Resultado:
 
-@
+`@`
 
---------------------------------------------------
+---
 
-## 8. Uso en Criptografía Real
+## 8. Uso real
 
 XOR aparece en:
 
@@ -152,116 +160,99 @@ XOR aparece en:
 - RC4
 - Stream Ciphers
 - ChaCha20
-- Malware obfuscation
+- Malware
 - Ingeniería inversa
 
---------------------------------------------------
+---
 
-## 9. One-Time Pad
+## 9. XOR en Malware
 
-Sistema teóricamente perfecto si:
-
-- Clave aleatoria
-- Misma longitud que mensaje
-- Solo se usa una vez
-- Se mantiene secreta
-
-Se basa en XOR.
-
---------------------------------------------------
-
-## 10. XOR en Malware
-
-Muchos malware esconden texto usando XOR.
+Muchos malware esconden texto con XOR.
 
 Ejemplo:
 
-cmd.exe
+`cmd.exe`
 
-Puede guardarse cifrado para evitar detección.
+Lo almacenan cifrado y luego lo recuperan en memoria.
 
-Luego el malware hace XOR y recupera texto en memoria.
+---
 
---------------------------------------------------
+## 10. XOR en Programación
 
-## 11. XOR en Programación
+Se usa para:
 
-Muy usado para:
-
-- Alternar bits
+- Cambiar bits
+- Flags binarias
 - Enmascarar valores
 - Operaciones rápidas
-- Flags binarias
-- CTFs
+- Retos CTF
 
---------------------------------------------------
+---
 
-## 12. Truco para Recordar
+## 11. Truco para Memorizar
 
-0 XOR 0 = 0
-1 XOR 1 = 0
-0 XOR 1 = 1
+0 XOR 0 = 0  
+1 XOR 1 = 0  
+0 XOR 1 = 1  
 1 XOR 0 = 1
 
-Iguales = 0
+Iguales = 0  
 Diferentes = 1
 
 Lo más importante:
 
 XOR dos veces con misma clave = original
 
---------------------------------------------------
+---
 
-## 13. Comparación rápida
+## 12. Comparación rápida
 
-AND = Ambos verdaderos
-OR = Uno verdadero
-XOR = Solo uno verdadero
+Operación | Resultado
+---------|----------
+AND | Ambos deben ser 1
+OR | Uno o ambos en 1
+XOR | Solo uno en 1
 
---------------------------------------------------
+---
 
-## 14. Aplicación en Ciberseguridad
+## 13. Aplicación en Ciberseguridad
 
-Se usa para:
-
-- Cifrado simple
-- Análisis malware
+- Malware analysis
 - Reverse engineering
 - Criptografía moderna
-- Retos CTF
-- Encoding básico
+- Forense digital
+- CTFs
 
---------------------------------------------------
+---
 
-## 15. Errores Comunes
+## 14. Errores Comunes
 
-Pensar que XOR solo sirve en matemáticas.
+### Pensar que XOR solo sirve en matemáticas
 
-No. Se usa muchísimo en seguridad.
+Incorrecto.
 
-Pensar que XOR solo cifra archivos simples.
+### Pensar que XOR solo cifra archivos básicos
 
-No. Está dentro de algoritmos modernos.
+Incorrecto.
 
-Olvidar la tabla XOR.
+### No memorizar la tabla XOR
 
-Es fundamental memorizarla.
+Error común.
 
---------------------------------------------------
+---
 
-## 16. Para Examen Memoriza
+## 15. Para Examen Memoriza
 
 - XOR = Exclusive OR
 - Iguales = 0
 - Diferentes = 1
-- XOR reversible
+- Reversible
 - Muy usado en criptografía
-- XOR + misma clave dos veces = original
 
---------------------------------------------------
+---
 
 ## Conclusión
 
-XOR es una operación lógica simple pero esencial en ciberseguridad y criptografía.
+XOR es una operación simple pero poderosa.
 
-Comprender XOR ayuda a entender cifrado moderno, malware, programación binaria y análisis técnico avanzado.
+Comprender XOR ayuda enormemente en criptografía, malware y ciberseguridad.
