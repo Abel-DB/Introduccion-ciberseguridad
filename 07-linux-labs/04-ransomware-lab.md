@@ -1,49 +1,45 @@
-# FASE 1 — Configuración de infraestructura atacante (Kali)
+# Laboratorio — Simulación de recuperación en entorno controlado (Kali)
 
 ## Objetivo
 
-Configurar Kali Linux como infraestructura atacante para el laboratorio de simulación en un entorno controlado utilizando Docker.
+Implementar un laboratorio educativo utilizando Kali Linux en Docker para representar un escenario controlado de impacto y recuperación.
 
-Arquitectura inicial:
+Arquitectura:
 
 ```text
 EndeavourOS (Host)
 
 └── Kali Docker
+
+        lab_ransomware/
+
+        ├── RansomwareSim/
+        │   ├── Encoder.py
+        │   ├── Decoder.py
+        │   └── ControlServer.py
         │
-        └── RansomwareSim
+        ├── empresa/
+        │   ├── finanzas/
+        │   ├── rrhh/
+        │   └── gerencia/
+        │
+        └── respaldo/
 ```
-
-Componentes del laboratorio:
-
-```text
-Encoder.py
-Decoder.py
-controlpanel.py
-```
-
-Roles:
-
-| Componente | Función |
-|---|---|
-| Encoder.py | Simulación de impacto |
-| Decoder.py | Recuperación |
-| controlpanel.py | Servidor de recuperación |
 
 ---
 
-## Paso 1 — Iniciar Kali
+# Paso 1 — Iniciar Kali
 
-Verificar contenedores:
+Verificar:
 
 ```bash
 docker ps -a
 ```
 
-Iniciar Kali:
+Entrar:
 
 ```bash
-docker start -i kali
+docker start -ai kali
 ```
 
 Verificar usuario:
@@ -52,7 +48,7 @@ Verificar usuario:
 whoami
 ```
 
-Resultado esperado:
+Resultado:
 
 ```text
 root
@@ -60,61 +56,47 @@ root
 
 ---
 
-## Paso 2 — Actualizar entorno
+# Paso 2 — Preparar entorno
 
-Actualizar repositorios:
+Actualizar:
 
 ```bash
 apt update
 ```
 
-Instalar herramientas:
+Instalar:
 
 ```bash
-apt install -y git python3 python3-pip tree nano
-```
-
-Verificar instalación:
-
-```bash
-python3 --version
-
-git --version
+apt install -y \
+git \
+python3 \
+python3-pip \
+python3-venv \
+tree \
+neovim
 ```
 
 ---
 
-## Paso 3 — Crear laboratorio
+# Paso 3 — Crear laboratorio
 
-Crear directorio principal:
-
-```bash
-mkdir ~/lab_ransomware
-```
-
-Entrar al directorio:
+Crear:
 
 ```bash
-cd ~/lab_ransomware
+mkdir lab_ransomware
 ```
 
-Verificar ruta:
+Entrar:
 
 ```bash
-pwd
-```
-
-Resultado esperado:
-
-```text
-/root/lab_ransomware
+cd lab_ransomware
 ```
 
 ---
 
-## Paso 4 — Clonar repositorio
+# Paso 4 — Clonar repositorio
 
-Clonar proyecto:
+Clonar:
 
 ```bash
 git clone https://github.com/HalilDeniz/RansomwareSim.git
@@ -126,7 +108,7 @@ Entrar:
 cd RansomwareSim
 ```
 
-Ver estructura:
+Verificar:
 
 ```bash
 tree -L 1
@@ -135,228 +117,207 @@ tree -L 1
 Resultado esperado:
 
 ```text
-Encoder.py
-Decoder.py
-controlpanel.py
-requirements.txt
+.
+├── ControlServer.py
+├── Decoder.py
+├── Encoder.py
+└── requirements.txt
 ```
 
 ---
 
-## Paso 5 — Instalar dependencias
+# Paso 5 — Entorno virtual
 
-Instalar:
+Crear:
+
+```bash
+python3 -m venv lab_ransom
+```
+
+Activar:
+
+```bash
+source lab_ransom/bin/activate
+```
+
+Instalar dependencias:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Verificar librería:
+Verificar:
 
 ```bash
-python3
-```
-
-Probar:
-
-```python
-from cryptography.fernet import Fernet
-```
-
-Salir:
-
-```python
-exit()
+pip list | grep cryptography
 ```
 
 ---
 
-# Adaptaciones Linux (Ubuntu víctima)
+# Paso 6 — Crear empresa
 
-El proyecto original fue desarrollado para Windows, por lo que fue necesario adaptar cuatro componentes principales para el laboratorio utilizando Ubuntu como víctima.
+Volver:
 
-## 1. Wallpaper
-
-Implementación original:
-
-```python
-ctypes.windll.user32
+```bash
+cd ..
 ```
 
-Dependencia:
+Crear:
 
-```text
-Windows
-```
+```bash
+mkdir -p empresa/finanzas
 
-Adaptación:
+mkdir -p empresa/rrhh
 
-```text
-visual/
-
-└── recovery_wallpaper.png
-```
-
-Uso:
-
-```text
-Indicador visual posterior al impacto
+mkdir -p empresa/gerencia
 ```
 
 ---
 
-## 2. Nota visual (README)
+## Finanzas
 
-Implementación original:
+Entrar:
 
-```python
-USERPROFILE/Desktop
+```bash
+cd empresa/finanzas
 ```
 
-Dependencia:
+Crear:
 
-```text
-Windows
-```
+```bash
+touch clientes.xlsx
 
-Adaptación:
+touch pagos.pdf
 
-```text
-~/Desktop/
-
-README_RECOVERY.txt
-```
-
-Uso:
-
-```text
-Mensaje informativo del laboratorio
+touch facturas.docx
 ```
 
 ---
 
-## 3. Extensiones objetivo
+## RRHH
 
-Implementación original:
+Entrar:
 
-```python
-file_extensions = [
-'.txt',
-'.docx',
-'.jpg'
-]
+```bash
+cd ../rrhh
 ```
 
-Laboratorio:
+Crear:
+
+```bash
+touch empleados.docx
+
+touch contratos.pdf
+
+touch nomina.xlsx
+```
+
+---
+
+## Gerencia
+
+Entrar:
+
+```bash
+cd ../gerencia
+```
+
+Crear:
+
+```bash
+touch reportes.docx
+
+touch proyectos.pdf
+
+touch estrategia.txt
+```
+
+---
+
+# Paso 7 — Crear respaldo
+
+Volver:
+
+```bash
+cd ~/lab_ransomware
+```
+
+Crear:
+
+```bash
+cp -r empresa respaldo
+```
+
+---
+
+# Verificación
+
+```bash
+tree
+```
+
+Resultado esperado:
 
 ```text
-empresa/
+lab_ransomware/
 
-gerencia/
-pagos.xlsx
-
-rrhh/
-personal.pdf
-
-finanzas/
-presupuesto.docx
+├── empresa
+│
+├── respaldo
+│
+└── RansomwareSim
 ```
 
-Extensiones utilizadas:
+---
+
+# Adaptaciones Linux
+
+## Wallpaper
+
+No implementado.
+
+La funcionalidad original fue diseñada para Windows y el laboratorio utiliza Docker sin entorno gráfico.
+
+---
+
+## Nota visual
+
+Se mantiene una nota informativa mediante:
+
+```text
+/root/Readme.txt
+```
+
+---
+
+## Extensiones
+
+Utilizadas:
 
 ```text
 .xlsx
+
 .pdf
+
 .docx
 ```
 
 ---
 
-## 4. Directorio objetivo
+# Escenarios
 
-Implementación original:
-
-```python
-directory='dosyalar/'
-```
-
-Laboratorio:
+CASO 1:
 
 ```text
-lab_ransomware/
+Existe respaldo
 
-└── empresa/
+→ recuperación desde respaldo
 ```
 
-Estructura:
+CASO 2:
 
 ```text
-empresa/
+No existe respaldo
 
-├── gerencia
-├── rrhh
-└── finanzas
+→ recuperación simulada
 ```
-
----
-
-## Flujo visual del laboratorio
-
-```text
-Impacto
-   ↓
-
-empresa/
-
-   ↓
-
-README aparece
-
-   ↓
-
-Wallpaper cambia
-
-   ↓
-
-Recuperación
-```
-
----
-
-## Rol de Kali
-
-Kali contendrá:
-
-```text
-Encoder
-ControlServer
-Clave recuperación
-```
-
-Arquitectura:
-
-```text
-Kali
-
-├── Encoder
-├── ControlServer
-└── clave
-
-        ↓
-
-Ubuntu
-
-empresa/
-respaldo/
-```
-
----
-
-## Notas
-
-- Entorno exclusivamente educativo.
-- Laboratorio ejecutado sobre Docker.
-- Ubuntu actuará como víctima.
-- Kali actuará como infraestructura atacante.
-- Se realizaron adaptaciones Windows → Linux.
-- La fase de entrega será implementada posteriormente.
