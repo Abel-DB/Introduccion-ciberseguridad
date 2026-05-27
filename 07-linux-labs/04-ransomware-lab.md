@@ -246,47 +246,7 @@ Resultado esperado:
 
 ---
 
-# Escenarios de recuperación
-
-## Caso 1 — Existe respaldo
-
-Recuperación mediante backup:
-
-```bash
-rm -rf empresa
-cp -r respaldo empresa
-```
-
-Funcionamiento:
-
-```text
-- Se elimina el directorio afectado
-- Se restaura la información desde respaldo
-- No es necesario utilizar Decoder.py
-```
-
----
-
-## Caso 2 — No existe respaldo
-
-Recuperación simulada utilizando Decoder.py y ControlServer.py.
-
-Proceso:
-
-```text
-1. Ejecutar ControlServer.py
-2. Ejecutar Encoder.py
-3. El servidor recibe la clave Fernet
-4. Ejecutar Decoder.py
-5. Decoder solicita la clave
-6. ControlServer muestra la clave
-7. Ingresar la clave solicitada
-8. Los archivos son restaurados
-```
-
----
-
-# Adaptaciones realizadas para Linux + Docker
+# Ejecución del cifrado
 
 El proyecto original fue diseñado para Windows.
 
@@ -294,7 +254,52 @@ Durante el laboratorio se realizaron múltiples modificaciones para adaptarlo co
 
 ---
 
-# Cambios realizados en Encoder.py
+# ControlServer.py
+
+## Instalación de colorama
+
+Error detectado:
+
+```text
+ModuleNotFoundError: No module named 'colorama'
+```
+
+Solución:
+
+```bash
+pip install colorama
+```
+
+---
+
+## Configuración TCP utilizada
+
+```python
+HOST = '0.0.0.0'
+PORT = 12345
+```
+
+Funcionamiento:
+
+```text
+- Escucha conexiones TCP
+- Recibe información del Encoder
+- Guarda la clave Fernet utilizada
+```
+
+---
+
+## Iniciar servidor
+
+Terminal 1:
+
+```bash
+python3 ControlServer.py
+```
+
+---
+
+# Encoder.py
 
 ## Cambio de directorio objetivo
 
@@ -388,7 +393,7 @@ def create_readme(self):
 
     for root, dirs, files in os.walk(self.directory):
 
-        readme_path = os.path.join(root, "mensaje.txt")
+        readme_path = os.path.join(root, "Message.txt")
 
         with open(readme_path, "w") as file:
 
@@ -400,20 +405,20 @@ def create_readme(self):
                 f"Directorio afectado:\n{root}\n"
             )
 
-        print(f"[+] MENSAJE creado: {readme_path}")
+        print(f"[+] README creado: {readme_path}")
 ```
 
 Resultado:
 
 ```text
 empresa/
-├── mensaje.txt
+├── Message.txt
 ├── finanzas/
-│   └── mensaje.txt
+│   └── Message.txt
 ├── rrhh/
-│   └── mensaje.txt
+│   └── Message.txt
 └── gerencia/
-    └── mensaje.txt
+    └── Message.txt
 ```
 
 ---
@@ -445,84 +450,72 @@ de crear las notas Message.txt.
 
 ---
 
-# Cambios realizados en ControlServer.py
+## Ejecutar cifrado
 
-## Instalación de colorama
-
-Error detectado:
-
-```text
-ModuleNotFoundError: No module named 'colorama'
-```
-
-Solución:
+Terminal 2:
 
 ```bash
-pip install colorama
-```
-
----
-
-## Orden correcto de ejecución
-
-```text
-1. Ejecutar ControlServer.py
-2. Ejecutar Encoder.py
-3. Ejecutar Decoder.py
-```
-
----
-
-## Configuración TCP utilizada
-
-```python
-HOST = '0.0.0.0'
-PORT = 12345
+python3 Encoder.py
 ```
 
 Funcionamiento:
 
 ```text
-- Escucha conexiones TCP
-- Recibe información del Encoder
-- Guarda la clave Fernet utilizada
-- Responde solicitudes del Decoder
+- Genera clave Fernet
+- Recorre directorios
+- Cifra archivos
+- Crea Message.txt
+- Envía información al servidor
 ```
 
 ---
 
-## Flujo de comunicación
+# Resultado esperado
 
-### Encoder.py envía:
-
-```json
-{
-  "hostname": "...",
-  "key": "...",
-  "active_users": "...",
-  "mac_address": "..."
-}
-```
-
-### Decoder.py solicita:
-
-```json
-{
-  "request": "key"
-}
-```
-
-### ControlServer.py responde:
-
-```json
-{
-  "key": "..."
-}
+```text
+empresa/
+├── finanzas/
+│   ├── clientes.xlsx.denizhalil
+│   ├── pagos.pdf.denizhalil
+│   └── Message.txt
+│
+├── rrhh/
+│   └── ...
+│
+└── gerencia/
+    └── ...
 ```
 
 ---
 
-# Cambios realizados en Decoder.py
+# Escenarios de recuperación
+
+## Caso 1 — Existe respaldo
+
+Recuperación mediante backup:
+
+```bash
+rm -rf empresa
+cp -r respaldo empresa
+```
+
+Funcionamiento:
+
+```text
+- Se elimina el directorio afectado
+- Se restaura la información desde respaldo
+- No es necesario utilizar Decoder.py
+```
+
+---
+
+## Caso 2 — No existe respaldo
+
+Recuperación simulada utilizando Decoder.py y ControlServer.py.
+
+---
+
+# Decoder.py
 
 ## Cambio de directorio objetivo
 
@@ -615,35 +608,9 @@ def delete_readme(self):
 
 ---
 
-# Flujo completo del laboratorio
+## Ejecutar descifrado
 
-## Terminal 1 — Servidor
-
-```bash
-python3 ControlServer.py
-```
-
----
-
-## Terminal 2 — Cifrado
-
-```bash
-python3 Encoder.py
-```
-
-Funcionamiento:
-
-```text
-- Genera clave Fernet
-- Recorre directorios
-- Cifra archivos
-- Crea Message.txt
-- Envía información al servidor
-```
-
----
-
-## Terminal 3 — Descifrado
+Terminal 3:
 
 ```bash
 python3 Decoder.py
@@ -656,6 +623,21 @@ Funcionamiento:
 - Descifra archivos .denizhalil
 - Restaura archivos originales
 - Elimina Message.txt
+```
+
+---
+
+# Flujo de recuperación
+
+```text
+1. Ejecutar ControlServer.py
+2. Ejecutar Encoder.py
+3. El servidor recibe la clave Fernet
+4. Ejecutar Decoder.py
+5. Decoder solicita la clave
+6. ControlServer muestra la clave
+7. Ingresar la clave solicitada
+8. Los archivos son restaurados
 ```
 
 ---
