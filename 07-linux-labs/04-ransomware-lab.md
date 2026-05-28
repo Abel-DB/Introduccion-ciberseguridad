@@ -549,8 +549,9 @@ fernet = Fernet(key.encode())
 ```
 
 Motivo:
-
+```text
 Fernet requiere la clave en formato bytes.
+```
 
 ---
 
