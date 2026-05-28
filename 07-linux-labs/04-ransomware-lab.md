@@ -6,12 +6,12 @@ Implementar un laboratorio educativo utilizando Kali Linux dentro de Docker para
 
 El laboratorio busca comprender el flujo básico de funcionamiento de un ransomware utilizando:
 
-- Python
-- Fernet
-- sockets TCP
-- arquitectura cliente-servidor
-- automatización de archivos
-- Linux + Docker
+* Python
+* Fernet
+* sockets TCP
+* arquitectura cliente-servidor
+* automatización de archivos
+* Linux + Docker
 
 ---
 
@@ -57,18 +57,6 @@ Iniciar Kali:
 docker start -ai kali
 ```
 
-Verificar usuario:
-
-```bash
-whoami
-```
-
-Resultado esperado:
-
-```text
-root
-```
-
 ---
 
 # Paso 2 — Preparar entorno
@@ -82,13 +70,7 @@ apt update
 Instalar herramientas necesarias:
 
 ```bash
-apt install -y \
-git \
-python3 \
-python3-pip \
-python3-venv \
-tree \
-neovim
+apt install -y git python3 python3-pip python3-venv tree neovim
 ```
 
 ---
@@ -262,42 +244,9 @@ Durante el laboratorio se realizaron múltiples modificaciones para adaptarlo co
 
 # ControlServer.py
 
-## Instalación de colorama
-
-Error detectado:
-
-```text
-ModuleNotFoundError: No module named 'colorama'
-```
-
-Solución:
-
-```bash
-pip install colorama
-```
-
----
-
-## Configuración TCP utilizada
-
-```python
-HOST = '0.0.0.0'
-PORT = 12345
-```
-
-Funcionamiento:
-
-```text
-- Escucha conexiones TCP
-- Recibe información del Encoder
-- Guarda la clave Fernet utilizada
-```
-
----
-
 ## Iniciar servidor
 
-Terminal 1:
+Primera terminal:
 
 ```bash
 python3 ControlServer.py
@@ -306,6 +255,28 @@ python3 ControlServer.py
 ---
 
 # Encoder.py
+
+## Abrir segunda terminal
+
+Ejecutar:
+
+```bash
+docker exec -it kali bash
+```
+
+Entrar:
+
+```bash
+cd /lab_ransom/RansomwareSim
+```
+
+Activar entorno virtual:
+
+```bash
+source lab_ransom/bin/activate
+```
+
+---
 
 ## Cambio de directorio objetivo
 
@@ -399,7 +370,7 @@ def create_readme(self):
 
     for root, dirs, files in os.walk(self.directory):
 
-        readme_path = os.path.join(root, "Message.txt")
+        readme_path = os.path.join(root, "mensaje.txt")
 
         with open(readme_path, "w") as file:
 
@@ -418,13 +389,13 @@ Resultado:
 
 ```text
 empresa/
-├── Message.txt
+├── mensaje.txt
 ├── finanzas/
-│   └── Message.txt
+│   └── mensaje.txt
 ├── rrhh/
-│   └── Message.txt
+│   └── mensaje.txt
 └── gerencia/
-    └── Message.txt
+    └── mensaje.txt
 ```
 
 ---
@@ -451,14 +422,14 @@ Motivo:
 
 ```text
 Si la conexión TCP fallaba, el programa terminaba antes
-de crear las notas Message.txt.
+de crear las notas mensaje.txt.
 ```
 
 ---
 
 ## Ejecutar cifrado
 
-Terminal 2:
+Segunda terminal:
 
 ```bash
 python3 Encoder.py
@@ -470,7 +441,7 @@ Funcionamiento:
 - Genera clave Fernet
 - Recorre directorios
 - Cifra archivos
-- Crea Message.txt
+- Crea mensaje.txt
 - Envía información al servidor
 ```
 
@@ -483,13 +454,19 @@ empresa/
 ├── finanzas/
 │   ├── clientes.xlsx.denizhalil
 │   ├── pagos.pdf.denizhalil
-│   └── Message.txt
+│   └── mensaje.txt
 │
 ├── rrhh/
 │   └── ...
 │
 └── gerencia/
     └── ...
+```
+
+Verificar archivos cifrados:
+
+```bash
+find /lab_ransom/empresa -type f
 ```
 
 ---
@@ -571,6 +548,10 @@ La clave recibida desde JSON llegaba como string.
 fernet = Fernet(key.encode())
 ```
 
+Motivo:
+
+Fernet requiere la clave en formato bytes.
+
 ---
 
 ## Adaptación de delete_readme()
@@ -603,7 +584,7 @@ def delete_readme(self):
 
         for file in files:
 
-            if file == "Message.txt":
+            if file == "mensaje.txt":
 
                 readme_path = os.path.join(root, file)
 
@@ -616,7 +597,7 @@ def delete_readme(self):
 
 ## Ejecutar descifrado
 
-Terminal 3:
+Ejecutar en la segunda terminal
 
 ```bash
 python3 Decoder.py
@@ -628,7 +609,7 @@ Funcionamiento:
 - Solicita la clave al servidor
 - Descifra archivos .denizhalil
 - Restaura archivos originales
-- Elimina Message.txt
+- Elimina mensaje.txt
 ```
 
 ---
@@ -642,7 +623,7 @@ Funcionamiento:
 4. Ejecutar Decoder.py
 5. Decoder solicita la clave
 6. ControlServer muestra la clave
-7. Ingresar la clave solicitada
+7. Ingresar la clave Fernet recibida por ControlServer.py
 8. Los archivos son restaurados
 ```
 
