@@ -324,6 +324,18 @@ Resultado esperado:
 
 ---
 
+## Servidor escuchando
+
+![ControlServer](docs/screenshots/controlserver.png)
+
+---
+
+## Empresa antes del cifrado
+
+![empresa](docs/screenshots/empresa.png)
+
+---
+
 ## Ejecución de Encoder.py
 
 ![encoder](docs/screenshots/encoder.png)
@@ -336,11 +348,27 @@ Resultado esperado:
 
 ---
 
+## Mensaje generado
+
+![mensaje](docs/Screenshots/mensaje.png)
+
+---
+
+## Clave resivida por el servidor
+
+![controlserverkey](docs/screenshots/controlserverkey.png)
+
+---
+
 ## Recuperación con Decoder.py
 
 ![decoder](docs/screenshots/decoder.png)
 
 ---
+
+## Recuperación exitosa
+
+![recuperación](docs/screenshots/recuperado.png)
 
 # Ejecución del cifrado
 
