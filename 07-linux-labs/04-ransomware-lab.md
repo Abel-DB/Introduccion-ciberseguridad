@@ -350,7 +350,7 @@ Resultado esperado:
 
 ## Mensaje generado
 
-![mensaje](docs/Screenshots/mensaje.png)
+![mensaje](docs/screenshots/mensaje.png)
 
 ---
 
