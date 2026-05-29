@@ -320,7 +320,7 @@ Resultado esperado:
 
 ## Estructura inicial
 
-![estructura](docs/screenshots/estructura.png)
+![estructura](docs/screenshots/01-estructura-inicial.png)
 
 ---
 
