@@ -354,7 +354,7 @@ Resultado esperado:
 
 ---
 
-## Clave resivida por el servidor
+## Clave recibida por el servidor
 
 ![controlserverkey](docs/screenshots/controlserverkey.png)
 
