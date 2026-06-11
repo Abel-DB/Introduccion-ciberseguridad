@@ -1,4 +1,4 @@
-# Laboratorio Linux: XOR Cifrado Real (Guía Profesional y Ordenada)
+# Laboratorio Linux: XOR Cifrado
 
 ## Introducción
 

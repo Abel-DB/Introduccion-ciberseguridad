@@ -4,136 +4,66 @@
 
 ### Objetivo
 
-Preparar un laboratorio local para analizar vulnerabilidades web utilizando OWASP Juice Shop y Burp Suite.
-
-En este laboratorio se utilizará:
-
-| Componente                   | Función                                         |
-| ---------------------------- | ----------------------------------------------- |
-| EndeavourOS Linux            | Sistema operativo utilizado durante las pruebas |
-| Docker                       | Ejecución aislada de Juice Shop                 |
-| OWASP Juice Shop             | Aplicación vulnerable para entrenamiento        |
-| Burp Suite Community Edition | Interceptación y análisis de tráfico HTTP       |
+Preparar un entorno de análisis web utilizando OWASP Juice Shop y Burp Suite para estudiar vulnerabilidades relacionadas con la manipulación de entradas controladas por el usuario.
 
 Al finalizar esta práctica podremos:
 
-* Ejecutar Juice Shop localmente.
+* Ejecutar OWASP Juice Shop localmente.
 * Acceder a la aplicación desde el navegador.
-* Interceptar tráfico HTTP utilizando Burp Suite.
-* Analizar las comunicaciones entre navegador y aplicación.
+* Interceptar tráfico HTTP mediante Burp Suite.
+* Analizar la comunicación entre cliente y servidor.
 
 ---
 
 ## Entorno Utilizado
 
-Sistema operativo:
-
-```text
-EndeavourOS Linux
-```
-
-Es importante documentar el entorno utilizado porque algunos procedimientos pueden variar entre Linux, Windows y macOS.
-
-Todas las pruebas descritas en este laboratorio fueron realizadas sobre Linux EndeavourOS.
+| Componente                   | Función                                  |
+| ---------------------------- | ---------------------------------------- |
+| EndeavourOS Linux            | Sistema operativo                        |
+| Docker                       | Ejecución aislada de Juice Shop          |
+| OWASP Juice Shop             | Aplicación vulnerable para entrenamiento |
+| Burp Suite Community Edition | Interceptación y análisis de tráfico     |
 
 ---
 
-## ¿Qué es OWASP Juice Shop?
+## OWASP Juice Shop
 
-OWASP Juice Shop es una aplicación web vulnerable desarrollada específicamente para entrenamiento en seguridad informática.
+OWASP Juice Shop es una aplicación vulnerable diseñada para el entrenamiento en seguridad ofensiva. Permite practicar técnicas de análisis y explotación en un entorno controlado y legal.
 
-Fue diseñada para que estudiantes, analistas y pentesters puedan practicar técnicas de análisis y explotación en un entorno legal y controlado.
+Características principales:
 
-### Características
-
-| Característica          | Descripción                                  |
-| ----------------------- | -------------------------------------------- |
-| Código abierto          | Puede ser descargada y estudiada libremente  |
-| Entorno seguro          | Diseñada para entrenamiento                  |
-| Vulnerabilidades reales | Simula problemas comunes en aplicaciones web |
-| Amplia documentación    | Utilizada en cursos y laboratorios           |
+* Código abierto.
+* Diseñada para entrenamiento.
+* Simula vulnerabilidades reales.
+* Amplia documentación y adopción en cursos de seguridad.
 
 ---
 
-## ¿Por Qué Utilizaremos Docker?
+## Despliegue con Docker
 
-Docker permite ejecutar aplicaciones dentro de contenedores aislados.
-
-Un contenedor puede entenderse como un entorno independiente que contiene todo lo necesario para ejecutar una aplicación.
-
-### Ventajas
-
-| Ventaja                  | Beneficio                                             |
-| ------------------------ | ----------------------------------------------------- |
-| Aislamiento              | No afecta al sistema operativo principal              |
-| Reproducibilidad         | El laboratorio puede recrearse fácilmente             |
-| Portabilidad             | Funciona de forma similar en distintos equipos        |
-| Facilidad de eliminación | Puede eliminarse sin dejar configuraciones residuales |
-
----
-
-## Descarga de OWASP Juice Shop
-
-Abrimos una terminal y ejecutamos:
+Descargamos la imagen:
 
 ```bash
 docker pull bkimminich/juice-shop
 ```
 
-### Explicación del Comando
-
-| Elemento              | Función                                   |
-| --------------------- | ----------------------------------------- |
-| docker                | Ejecuta Docker                            |
-| pull                  | Descarga una imagen desde Docker Hub      |
-| bkimminich/juice-shop | Nombre de la imagen oficial de Juice Shop |
-
-Cuando finalice la descarga tendremos disponible una copia local de la aplicación.
-
----
-
-## Ejecución del Contenedor
-
-Iniciamos Juice Shop mediante:
+Iniciamos el contenedor:
 
 ```bash
 docker run -d -p 3000:3000 --name juice-shop bkimminich/juice-shop
 ```
 
-### Explicación de los Parámetros
-
-| Parámetro         | Función                                |
-| ----------------- | -------------------------------------- |
-| run               | Crea e inicia un contenedor            |
-| -d                | Ejecuta el contenedor en segundo plano |
-| -p 3000:3000      | Expone el puerto 3000 del contenedor   |
-| --name juice-shop | Asigna un nombre al contenedor         |
-
-Una vez ejecutado el comando Docker devolverá un identificador correspondiente al contenedor creado.
-
----
-
-## Verificación del Contenedor
-
-Para comprobar que Juice Shop se encuentra en ejecución utilizamos:
+Verificamos que se encuentra en ejecución:
 
 ```bash
 docker ps
 ```
-
-### Explicación
-
-| Comando   | Función                          |
-| --------- | -------------------------------- |
-| docker ps | Muestra los contenedores activos |
 
 Resultado esperado:
 
 ```text
 STATUS: Up
 ```
-
-Si observamos el estado "Up" significa que el contenedor está funcionando correctamente.
 
 ---
 
@@ -145,47 +75,32 @@ Abrimos el navegador y visitamos:
 http://localhost:3000
 ```
 
-### ¿Qué Significa Esta Dirección?
-
-| Elemento  | Descripción                             |
-| --------- | --------------------------------------- |
-| localhost | Hace referencia a nuestro propio equipo |
-| 3000      | Puerto utilizado por Juice Shop         |
-
-Si la aplicación se encuentra funcionando correctamente veremos la página principal de OWASP Juice Shop.
+Si todo funciona correctamente veremos la página principal de OWASP Juice Shop.
 
 ---
 
-## ¿Qué es Burp Suite?
+## Burp Suite
 
-Burp Suite es una plataforma utilizada para analizar aplicaciones web.
+Burp Suite actuará como intermediario entre el navegador y la aplicación, permitiendo observar y modificar solicitudes HTTP.
 
-Durante este laboratorio actuará como intermediario entre el navegador y Juice Shop.
+Herramientas utilizadas:
 
-Esto nos permitirá observar exactamente qué información se envía y qué información se recibe.
+| Herramienta  | Función              |
+| ------------ | -------------------- |
+| Proxy        | Interceptar tráfico  |
+| HTTP History | Revisar solicitudes  |
+| Repeater     | Modificar peticiones |
+| Burp Browser | Navegador integrado  |
 
-### Funcionalidades Utilizadas
+### Inicio
 
-| Herramienta  | Uso durante el laboratorio       |
-| ------------ | -------------------------------- |
-| Proxy        | Interceptar tráfico              |
-| HTTP History | Revisar solicitudes realizadas   |
-| Repeater     | Modificar peticiones manualmente |
-| Burp Browser | Navegador integrado de Burp      |
-
----
-
-## Inicio de Burp Suite
-
-Abrimos Burp Suite Community Edition.
-
-Durante el inicio seleccionamos:
+Seleccionar:
 
 ```text
 Temporary Project
 ```
 
-Posteriormente:
+Luego:
 
 ```text
 Use Burp Defaults
@@ -197,45 +112,35 @@ Finalmente:
 Start Burp
 ```
 
-Burp cargará la interfaz principal.
-
 ---
 
-## Apertura de Burp Browser
+## Burp Browser
 
-Accedemos a:
+Desde:
 
 ```text
 Proxy → Intercept
 ```
 
-Posteriormente seleccionamos:
+Seleccionamos:
 
 ```text
 Open Browser
 ```
 
-Burp abrirá un navegador Chromium preconfigurado para utilizar automáticamente el proxy.
-
-### Ventajas de Burp Browser
-
-| Ventaja                        | Descripción                                |
-| ------------------------------ | ------------------------------------------ |
-| Configuración automática       | No requiere modificar navegadores externos |
-| Integración con Burp           | Todo el tráfico pasa por el proxy          |
-| Menos errores de configuración | Ideal para laboratorios                    |
+Burp abrirá un navegador configurado para utilizar automáticamente el proxy.
 
 ---
 
 ## Verificación de Intercepción
 
-En Burp activamos:
+Activamos:
 
 ```text
 Intercept is on
 ```
 
-Desde Burp Browser accedemos a:
+Accedemos a:
 
 ```text
 http://localhost:3000
@@ -247,40 +152,37 @@ Si Burp detiene una solicitud similar a:
 GET / HTTP/1.1
 ```
 
-podemos confirmar que el navegador está utilizando correctamente el proxy.
+podemos confirmar que la configuración es correcta.
 
 ---
 
 ## Resultado Esperado
 
-Al finalizar esta práctica debemos haber conseguido lo siguiente:
+Al finalizar esta fase deberíamos tener:
 
-| Verificación                   | Estado esperado |
-| ------------------------------ | --------------- |
-| Docker funcionando             | ✓               |
-| Juice Shop ejecutándose        | ✓               |
-| Acceso a localhost:3000        | ✓               |
-| Burp Suite operativo           | ✓               |
-| Burp Browser funcionando       | ✓               |
-| Intercepción de tráfico activa | ✓               |
-
-Con el entorno preparado ya podremos comenzar el análisis de la aplicación y estudiar el comportamiento de entradas controladas por el usuario en la siguiente parte.
+| Verificación            | Estado |
+| ----------------------- | ------ |
+| Docker operativo        | ✓      |
+| Juice Shop ejecutándose | ✓      |
+| Acceso a localhost:3000 | ✓      |
+| Burp Suite funcionando  | ✓      |
+| Burp Browser operativo  | ✓      |
+| Intercepción activa     | ✓      |
 
 ---
 
-## Parte 2 - Comprendiendo HTML Injection e Inicio del Análisis
+# Parte 2 - Comprendiendo HTML Injection
 
-### Objetivo
+## Objetivo
 
-Comprender qué es HTML Injection y comenzar el análisis de OWASP Juice Shop utilizando observación directa y Burp Suite.
+Comprender qué es HTML Injection e identificar posibles puntos de entrada dentro de la aplicación.
 
-Al finalizar esta parte podremos:
+Al finalizar podremos:
 
-* Comprender qué es HTML Injection.
-* Diferenciar entre texto e HTML interpretado.
-* Identificar posibles candidatos para pruebas.
-* Formular hipótesis basadas en evidencias.
-* Analizar el comportamiento inicial de la aplicación.
+* Entender el funcionamiento de HTML Injection.
+* Diferenciar entre texto y HTML interpretado.
+* Identificar funcionalidades candidatas para pruebas.
+* Formular hipótesis basadas en observaciones.
 
 ---
 
@@ -288,155 +190,78 @@ Al finalizar esta parte podremos:
 
 HTML Injection ocurre cuando una aplicación permite que contenido HTML controlado por el usuario sea interpretado por el navegador en lugar de mostrarse como texto.
 
-En otras palabras, el navegador procesa etiquetas HTML introducidas por un usuario y las incorpora a la página.
+Ejemplo:
 
----
-
-## Ejemplo Conceptual
-
-Supongamos que un usuario introduce:
+Entrada:
 
 ```html
 <h1>TEST</h1>
 ```
 
-Pueden ocurrir dos situaciones.
-
-### Comportamiento Seguro
-
-La aplicación muestra:
+Comportamiento seguro:
 
 ```text
 <h1>TEST</h1>
 ```
 
-El navegador trata el contenido como texto.
+Comportamiento vulnerable:
 
-No existe interpretación HTML.
+# TEST
 
----
-
-### Comportamiento Vulnerable
-
-La aplicación muestra:
-
-## TEST
-
-En este caso el navegador interpreta la etiqueta HTML y crea un encabezado real.
+La etiqueta es interpretada y renderizada como un elemento HTML real.
 
 ---
 
-## Error Común Durante una Auditoría
+## Metodología
 
-Muchos principiantes comienzan probando payloads en todos los campos disponibles.
+Durante el análisis seguiremos el siguiente proceso:
 
-Por ejemplo:
+1. Reconocimiento.
+2. Observación.
+3. Formulación de hipótesis.
+4. Prueba controlada.
+5. Recolección de evidencias.
+6. Conclusión.
 
-```text
-Buscador
-Perfil
-Comentarios
-Reseñas
-Direcciones
-Mensajes
-```
-
-Este enfoque suele ser lento y genera mucho ruido.
-
-Antes de enviar payloads debemos intentar comprender cómo funciona la aplicación.
-
----
-
-## Metodología Utilizada
-
-Durante este laboratorio utilizaremos la siguiente metodología:
-
-| Paso           | Objetivo                                 |
-| -------------- | ---------------------------------------- |
-| Reconocimiento | Identificar funcionalidades interesantes |
-| Observación    | Analizar cómo responde la aplicación     |
-| Hipótesis      | Formular una posible explicación         |
-| Prueba         | Ejecutar una prueba controlada           |
-| Evidencia      | Recopilar información objetiva           |
-| Conclusión     | Determinar si existe una vulnerabilidad  |
-
----
-
-## Pregunta Clave
-
-Antes de probar HTML debemos preguntarnos:
+Pregunta clave:
 
 > ¿La aplicación vuelve a mostrar información controlada por el usuario?
 
-Si la respuesta es sí:
-
-```text
-Posible candidato para análisis
-```
-
-Si la respuesta es no:
-
-```text
-Menor prioridad durante las pruebas iniciales
-```
+Si la respuesta es sí, existe un candidato interesante para análisis.
 
 ---
 
-## Reconocimiento de OWASP Juice Shop
+## Reconocimiento de la Aplicación
 
-Abrimos OWASP Juice Shop desde Burp Browser.
+Durante la exploración observamos varias funcionalidades:
 
-Observamos diferentes funcionalidades:
+| Funcionalidad    | Entrada controlada por el usuario |
+| ---------------- | --------------------------------- |
+| Buscador         | Sí                                |
+| Registro         | Sí                                |
+| Inicio de sesión | Sí                                |
+| Reseñas          | Sí                                |
+| Productos        | No directamente                   |
 
-| Funcionalidad    | ¿Controlada por el usuario? |
-| ---------------- | --------------------------- |
-| Buscador         | Sí                          |
-| Registro         | Sí                          |
-| Inicio de sesión | Sí                          |
-| Reseñas          | Sí                          |
-| Productos        | No directamente             |
-
-Nuestro objetivo es identificar una funcionalidad donde la información introducida por el usuario pueda influir en la interfaz.
+El buscador resulta especialmente interesante porque modifica inmediatamente la interfaz utilizando datos introducidos por el usuario.
 
 ---
 
-## Selección del Buscador
+## Hipótesis Inicial
 
-Durante la exploración observamos que el buscador modifica el contenido mostrado en pantalla según el valor introducido.
+Si el buscador utiliza información proporcionada por el usuario para actualizar la interfaz, podría existir la posibilidad de que también interprete HTML.
 
-Esto llama nuestra atención porque existe una relación directa entre:
-
-```text
-Entrada del usuario
-↓
-Cambio visible en la interfaz
-```
-
-Por este motivo seleccionamos el buscador como candidato inicial para análisis.
-
----
-
-## Primera Hipótesis
-
-Si el buscador utiliza información controlada por el usuario para actualizar la interfaz, podría existir la posibilidad de que también interprete HTML.
-
-Para comprobarlo realizaremos una prueba sencilla.
-
----
-
-## Prueba Inicial
-
-Introducimos en el buscador:
+Para comprobarlo introducimos:
 
 ```html
 <h1>TEST</h1>
 ```
 
-y ejecutamos la búsqueda.
+en el buscador.
 
 ---
 
-## Observación Visual
+## Observación
 
 La aplicación no muestra:
 
@@ -446,123 +271,59 @@ La aplicación no muestra:
 
 En su lugar observamos:
 
-## TEST
+# TEST
 
-La palabra aparece renderizada como un encabezado.
-
----
-
-## Análisis de la Observación
-
-Esta es una evidencia importante.
-
-Si el navegador mostrara literalmente:
-
-```text
-<h1>TEST</h1>
-```
-
-podríamos concluir que el contenido se trata como texto.
-
-Sin embargo observamos que la etiqueta es interpretada y convertida en un elemento visual.
+Esto sugiere que el navegador está interpretando la etiqueta HTML.
 
 ---
 
-## Evidencia Obtenida
+## Evidencias Iniciales
 
-Podemos afirmar que:
+✓ El usuario controla la entrada.
 
-✓ El usuario controla una entrada.
+✓ La interfaz utiliza dicha entrada.
 
-✓ La aplicación utiliza esa entrada para modificar la interfaz.
+✓ El navegador parece interpretar HTML.
 
-✓ El navegador parece interpretar la etiqueta HTML.
+Sin embargo, todavía no podemos confirmar dónde ocurre la interpretación.
 
----
-
-## ¿Es Suficiente Para Confirmar una Vulnerabilidad?
-
-Todavía no.
-
-Aunque la evidencia visual es muy fuerte, aún debemos responder varias preguntas:
-
-* ¿Qué petición genera la aplicación?
-* ¿Qué parámetro recibe nuestros datos?
-* ¿Qué devuelve el servidor?
-* ¿Dónde ocurre exactamente la interpretación?
-
-Para responder estas preguntas utilizaremos Burp Suite.
+Para ello analizaremos el tráfico HTTP.
 
 ---
 
 ## Análisis con Burp Suite
 
-Abrimos:
+En:
 
 ```text
 Proxy → HTTP History
 ```
 
-Buscamos las solicitudes generadas por la búsqueda.
-
-Durante las pruebas observamos una petición similar a:
+identificamos una solicitud similar a:
 
 ```http
 GET /rest/products/search?q=
 ```
 
----
+Información relevante:
 
-## Información Identificada
-
-Aunque el valor introducido no aparece claramente reflejado en la petición observada, sí podemos identificar elementos importantes.
-
-| Elemento    | Valor                 |
-| ----------- | --------------------- |
-| Endpoint    | /rest/products/search |
-| Parámetro   | q                     |
-| Método HTTP | GET                   |
-
-Esto nos permite identificar el componente responsable de la búsqueda.
+| Elemento  | Valor                 |
+| --------- | --------------------- |
+| Endpoint  | /rest/products/search |
+| Método    | GET                   |
+| Parámetro | q                     |
 
 ---
 
-## Envío a Repeater
+## Análisis con Repeater
 
-Seleccionamos la petición.
-
-Posteriormente:
+Enviamos la solicitud a Repeater:
 
 ```text
 Click derecho → Send to Repeater
 ```
 
-Abrimos la pestaña:
-
-```text
-Repeater
-```
-
----
-
-## ¿Por Qué Utilizamos Repeater?
-
-Repeater permite modificar manualmente una solicitud y analizar la respuesta generada por el servidor.
-
-Ventajas:
-
-| Ventaja              | Beneficio                                     |
-| -------------------- | --------------------------------------------- |
-| Control total        | Modificamos exactamente lo que enviamos       |
-| Repetición rápida    | Podemos realizar múltiples pruebas            |
-| Análisis aislado     | Eliminamos variables de la interfaz           |
-| Comparación sencilla | Podemos observar diferencias entre respuestas |
-
----
-
-## Modificación de la Solicitud
-
-Dentro de Repeater modificamos:
+Modificamos:
 
 ```http
 q=
@@ -574,17 +335,9 @@ por:
 q=<h1>TEST</h1>
 ```
 
-Posteriormente presionamos:
+y enviamos la petición.
 
-```text
-Send
-```
-
----
-
-## Respuesta Observada
-
-El servidor responde:
+Respuesta obtenida:
 
 ```json
 {
@@ -595,148 +348,61 @@ El servidor responde:
 
 ---
 
-## Análisis de la Respuesta
+## Resultados
 
 Observamos que:
 
-| Observación                  | Resultado |
-| ---------------------------- | --------- |
-| Respuesta HTML               | No        |
-| Respuesta JSON               | Sí        |
-| HTML interpretado            | No        |
-| Generación de etiquetas HTML | No        |
-
----
-
-## Hipótesis Actual
-
-Hasta este momento sabemos que:
-
-| Evidencia                              | Resultado |
-| -------------------------------------- | --------- |
-| El usuario controla la entrada         | Sí        |
-| El navegador interpreta HTML           | Sí        |
-| El servidor devuelve JSON              | Sí        |
-| El servidor devuelve HTML interpretado | No        |
+* El servidor responde con JSON.
+* No devuelve HTML interpretado.
+* No genera elementos HTML visibles en la respuesta.
 
 Esto plantea una pregunta importante:
 
-> Si el servidor no devuelve HTML interpretado, ¿dónde está ocurriendo la interpretación?
+> Si el servidor devuelve únicamente JSON, ¿dónde ocurre la interpretación observada?
+
+Para responderla analizaremos el DOM.
 
 ---
 
-## Evidencias Reunidas Hasta el Momento
+# Parte 3 - Verificación con DevTools
 
-✓ El buscador utiliza información controlada por el usuario.
+## Objetivo
 
-✓ El navegador interpreta HTML.
-
-✓ El endpoint identificado es:
-
-```text
-/rest/products/search
-```
-
-✓ El parámetro utilizado es:
-
-```text
-q
-```
-
-✓ El servidor devuelve JSON.
-
-✓ No observamos evidencia de interpretación HTML por parte del servidor.
-
----
-
-## Próximo Paso
-
-Todavía debemos responder varias preguntas:
-
-1. ¿El navegador está creando elementos HTML reales?
-2. ¿El DOM fue modificado?
-3. ¿La interpretación ocurre en el navegador?
-4. ¿Existe realmente HTML Injection?
-
-Para responder estas preguntas inspeccionaremos el DOM utilizando DevTools en la siguiente parte del laboratorio.
-
----
-
-## Parte 3 - Verificación con DevTools y Conclusión de la Vulnerabilidad
-
-### Objetivo
-
-Confirmar si el navegador está creando elementos HTML reales dentro del DOM y determinar dónde ocurre la interpretación observada durante las pruebas.
-
-Hasta este momento hemos obtenido las siguientes evidencias:
-
-| Evidencia                                | Resultado             |
-| ---------------------------------------- | --------------------- |
-| El usuario controla la entrada           | Sí                    |
-| El navegador interpreta HTML visualmente | Sí                    |
-| El endpoint identificado                 | /rest/products/search |
-| El parámetro utilizado                   | q                     |
-| El servidor devuelve JSON                | Sí                    |
-
-Ahora debemos verificar qué está ocurriendo dentro del navegador.
+Determinar si el navegador está creando elementos HTML reales dentro del DOM.
 
 ---
 
 ## ¿Qué es el DOM?
 
-DOM significa:
+El DOM (Document Object Model) es la representación interna de una página web utilizada por el navegador.
 
-```text
-Document Object Model
-```
+Cuando el navegador interpreta HTML, crea nodos dentro del DOM para representar cada elemento.
 
-Es la representación interna que el navegador construye de una página web.
-
-Cuando una página contiene elementos HTML como:
-
-```html
-<h1>TEST</h1>
-```
-
-el navegador crea nodos dentro del DOM para representar esos elementos.
-
-Por este motivo, inspeccionar el DOM nos permite comprobar si el contenido fue tratado como texto o si fue interpretado como HTML.
+Por este motivo, inspeccionar el DOM permite diferenciar entre texto e HTML interpretado.
 
 ---
 
-## Apertura de DevTools
+## Inspección
 
-Con OWASP Juice Shop abierto, presionamos:
+Abrimos DevTools:
 
 ```text
 F12
 ```
 
-También podemos utilizar:
+o:
 
 ```text
 Click derecho → Inspect
 ```
 
-Se abrirán las herramientas de desarrollo del navegador.
-
----
-
-## Inspección del DOM
-
-Seleccionamos la pestaña:
+Dentro de la pestaña:
 
 ```text
 Elements
 ```
 
-Posteriormente utilizamos la búsqueda:
-
-```text
-Ctrl + F
-```
-
-Buscamos:
+buscamos:
 
 ```text
 TEST
@@ -744,9 +410,9 @@ TEST
 
 ---
 
-## Resultado Observado
+## Resultado
 
-Durante la inspección encontramos un elemento similar a:
+Encontramos un elemento similar a:
 
 ```html
 <span id="searchValue">
@@ -754,13 +420,7 @@ Durante la inspección encontramos un elemento similar a:
 </span>
 ```
 
----
-
-## ¿Por Qué es Importante?
-
-Esta observación nos proporciona una evidencia muy valiosa.
-
-Si la aplicación estuviera tratando nuestro contenido como texto, esperaríamos encontrar algo similar a:
+Si el contenido hubiera sido tratado como texto esperaríamos algo parecido a:
 
 ```html
 <span id="searchValue">
@@ -768,238 +428,57 @@ Si la aplicación estuviera tratando nuestro contenido como texto, esperaríamos
 </span>
 ```
 
-o simplemente una cadena de texto.
-
-Sin embargo, encontramos un elemento:
-
-```html
-<h1>
-```
-
-real dentro del DOM.
+Sin embargo observamos un elemento HTML real dentro del DOM.
 
 ---
 
-## Primera Conclusión
+## Correlación de Evidencias
 
-Podemos afirmar que:
-
-✓ El navegador creó un nuevo elemento HTML.
-
-✓ El contenido no fue tratado como texto.
-
-✓ Existe interpretación de HTML controlado por el usuario.
-
----
-
-## Relacionando las Evidencias
-
-Ahora analizaremos todas las evidencias obtenidas durante el laboratorio.
-
----
-
-### Evidencia 1 - Observación Visual
-
-Introducimos:
-
-```html
-<h1>TEST</h1>
-```
-
-Resultado observado:
-
-## TEST
-
-El navegador renderiza un encabezado real.
-
----
-
-### Evidencia 2 - Tráfico HTTP
-
-Petición identificada:
-
-```http
-GET /rest/products/search?q=
-```
-
-Respuesta observada:
-
-```json
-{
-  "status":"success",
-  "data":[]
-}
-```
-
-La respuesta corresponde a un objeto JSON.
-
----
-
-### Evidencia 3 - Inspección del DOM
-
-DevTools muestra:
-
-```html
-<span id="searchValue">
-    <h1>TEST</h1>
-</span>
-```
-
-El elemento HTML existe realmente dentro del DOM.
-
----
-
-## ¿Por Qué la Vulnerabilidad No Ocurre en el Servidor?
-
-Una vez confirmada la interpretación HTML debemos determinar dónde ocurre exactamente.
-
-Para ello analizamos las evidencias obtenidas.
-
----
-
-### Respuesta del Servidor
-
-La petición enviada fue:
-
-```http
-GET /rest/products/search?q=<h1>TEST</h1>
-```
-
-La respuesta observada fue:
-
-```json
-{
-  "status":"success",
-  "data":[]
-}
-```
-
-Observamos que el servidor responde únicamente con JSON.
-
-No devuelve:
-
-```html
-<h1>TEST</h1>
-```
-
-Tampoco genera una página HTML que contenga nuestro payload.
-
----
-
-### ¿Qué Esperaríamos Si la Vulnerabilidad Estuviera en el Servidor?
-
-Si el servidor fuera responsable de la interpretación HTML podríamos esperar observar:
-
-| Posible evidencia                    | ¿Se observa? |
-| ------------------------------------ | ------------ |
-| HTML generado por el servidor        | No           |
-| Payload reflejado en la respuesta    | No           |
-| HTML interpretado en la respuesta    | No           |
-| Página HTML generada por el servidor | No           |
-
-Durante las pruebas no observamos ninguna de estas situaciones.
-
----
-
-### Comportamiento del Navegador
-
-A pesar de que el servidor responde únicamente con JSON, la aplicación muestra:
-
-## TEST
-
-Esto significa que la interpretación ocurre después de recibir la respuesta.
-
----
-
-### Evidencia del DOM
-
-DevTools muestra:
-
-```html
-<span id="searchValue">
-    <h1>TEST</h1>
-</span>
-```
-
-Este elemento no aparece dentro de la respuesta JSON.
-
-Fue creado posteriormente por el navegador.
+| Evidencia                               | Resultado |
+| --------------------------------------- | --------- |
+| El usuario controla la entrada          | Sí        |
+| La aplicación utiliza la entrada        | Sí        |
+| El navegador interpreta HTML            | Sí        |
+| Existen nuevos elementos HTML en el DOM | Sí        |
+| El servidor devuelve JSON               | Sí        |
+| El servidor interpreta HTML             | No        |
 
 ---
 
 ## Reconstrucción del Proceso
 
-Durante las pruebas observamos la siguiente secuencia:
-
 ```text
-Usuario introduce:
-
-<h1>TEST</h1>
-
-↓
-
-La aplicación genera:
-
-GET /rest/products/search?q=<h1>TEST</h1>
-
-↓
-
-El servidor responde:
-
-{
-  "status":"success",
-  "data":[]
-}
-
-↓
-
-JavaScript procesa la información recibida
-
-↓
-
-El navegador modifica el DOM
-
-↓
-
-Se crea un nuevo elemento HTML
-
-↓
-
-TEST aparece como encabezado
+Entrada del usuario
+        ↓
+Petición HTTP
+        ↓
+Respuesta JSON
+        ↓
+JavaScript procesa datos
+        ↓
+Modificación del DOM
+        ↓
+Renderizado HTML
 ```
 
----
-
-## Evidencias Finales
-
-| Evidencia                              | Resultado |
-| -------------------------------------- | --------- |
-| El usuario controla la entrada         | Sí        |
-| La aplicación utiliza esa entrada      | Sí        |
-| El navegador interpreta HTML           | Sí        |
-| DevTools muestra nuevos elementos HTML | Sí        |
-| El servidor devuelve JSON              | Sí        |
-| El servidor interpreta HTML            | No        |
+La interpretación ocurre después de recibir la respuesta del servidor.
 
 ---
 
 ## Conclusión Técnica
 
-Las evidencias obtenidas indican que:
+Las evidencias obtenidas permiten concluir que:
 
 * El usuario controla la entrada.
 * El navegador interpreta HTML.
-* El servidor devuelve JSON.
-* El servidor no devuelve HTML interpretado.
-* DevTools confirma la creación de elementos HTML dentro del DOM.
+* El servidor devuelve únicamente JSON.
+* DevTools confirma la creación de elementos HTML reales.
 
-Por tanto, la interpretación no ocurre en el servidor.
-
-La interpretación ocurre en el navegador.
+Por tanto, la interpretación no ocurre en el servidor sino en el navegador.
 
 ---
 
-## Clasificación de la Vulnerabilidad
+## Clasificación
 
 | Elemento       | Resultado                |
 | -------------- | ------------------------ |
@@ -1011,32 +490,22 @@ La interpretación ocurre en el navegador.
 
 ## Impacto
 
-La vulnerabilidad permite que contenido HTML controlado por el usuario sea incorporado al DOM y mostrado dentro de la interfaz.
+La vulnerabilidad permite incorporar contenido HTML controlado por el usuario dentro de la interfaz.
 
-Dependiendo del contexto de la aplicación, esto podría permitir:
+Posibles consecuencias:
 
-| Posible Impacto | Descripción |
-|----------------|-------------|
-| Alteración visual | Modificación de la apariencia de la página |
-| Inserción de contenido | Inclusión de elementos HTML arbitrarios |
-| Engaño al usuario | Creación de formularios o mensajes falsos |
-| Manipulación de interfaz | Alteración del contenido visible para el usuario |
-
-En este laboratorio el impacto observado consiste en la capacidad de insertar elementos HTML dentro de la interfaz mediante contenido controlado por el usuario.
+| Impacto                  | Descripción                               |
+| ------------------------ | ----------------------------------------- |
+| Alteración visual        | Modificación de la apariencia             |
+| Inserción de contenido   | Inclusión de HTML arbitrario              |
+| Engaño al usuario        | Creación de mensajes o formularios falsos |
+| Manipulación de interfaz | Alteración del contenido mostrado         |
 
 ---
 
-## Caso Comparativo - Sistema de Reseñas
+# Caso Comparativo - Sistema de Reseñas
 
-Hasta este momento hemos analizado un caso vulnerable.
-
-Sin embargo, durante una auditoría también es importante demostrar cuándo una funcionalidad **no es vulnerable**.
-
-Por este motivo analizaremos el sistema de reseñas.
-
----
-
-## Prueba Realizada
+Durante una auditoría también es importante identificar comportamientos seguros.
 
 Introducimos:
 
@@ -1046,38 +515,26 @@ Introducimos:
 
 como contenido de una reseña.
 
----
-
-## Observación Visual
-
-La aplicación muestra:
+Resultado observado:
 
 ```text
 <h1>TEST</h1>
 ```
 
-No aparece ningún encabezado.
+El contenido es mostrado como texto.
 
 ---
 
 ## Análisis
 
-Observaciones:
+| Comportamiento               | Resultado |
+| ---------------------------- | --------- |
+| El contenido se almacena     | Sí        |
+| El contenido se muestra      | Sí        |
+| El navegador interpreta HTML | No        |
+| Se crean elementos HTML      | No        |
 
-| Comportamiento                 | Resultado |
-| ------------------------------ | --------- |
-| El contenido es almacenado     | Sí        |
-| El contenido es devuelto       | Sí        |
-| El navegador interpreta HTML   | No        |
-| Se crean nuevos elementos HTML | No        |
-
----
-
-## Conclusión del Caso Comparativo
-
-Aunque la aplicación almacena contenido HTML, dicho contenido es tratado como texto.
-
-Por tanto:
+Conclusión:
 
 ```text
 No existe HTML Injection.
@@ -1085,63 +542,22 @@ No existe HTML Injection.
 
 ---
 
-## Diferencia Entre Almacenar e Interpretar HTML
+## Diferencia Fundamental
 
-Uno de los errores más comunes consiste en asumir que almacenar HTML implica una vulnerabilidad.
+| Situación                          | HTML Injection |
+| ---------------------------------- | -------------- |
+| HTML almacenado como texto         | No             |
+| HTML mostrado como texto           | No             |
+| HTML interpretado por el navegador | Sí             |
 
-Esto es incorrecto.
-
-| Situación                                              | ¿Existe HTML Injection? |
-| ------------------------------------------------------ | ----------------------- |
-| Se almacena HTML como texto                            | No                      |
-| Se devuelve HTML como texto                            | No                      |
-| El navegador interpreta HTML controlado por el usuario | Sí                      |
-
-La vulnerabilidad aparece cuando el navegador interpreta contenido HTML controlado por el usuario y lo convierte en elementos reales dentro del DOM.
+La vulnerabilidad aparece únicamente cuando contenido HTML controlado por el usuario es interpretado y convertido en elementos reales dentro del DOM.
 
 ---
 
-## Metodología Utilizada
+# Conclusión General
 
-Durante este laboratorio se siguió la siguiente metodología:
+Durante el análisis del buscador de OWASP Juice Shop se comprobó que contenido HTML controlado por el usuario era insertado e interpretado dentro del DOM. El análisis con Burp Suite mostró que el servidor únicamente devolvía respuestas JSON y no generaba HTML interpretado. La inspección mediante DevTools confirmó la creación de elementos HTML reales a partir de la entrada del usuario.
 
-1. Reconocimiento de la aplicación.
-2. Identificación de entradas controladas por el usuario.
-3. Formulación de hipótesis.
-4. Observación visual.
-5. Análisis HTTP con Burp Suite.
-6. Modificación de peticiones mediante Repeater.
-7. Inspección del DOM con DevTools.
-8. Correlación de evidencias.
-9. Determinación del origen de la vulnerabilidad.
-10. Documentación del hallazgo.
+Con base en estas evidencias se concluyó la existencia de una vulnerabilidad de DOM-Based HTML Injection localizada en el frontend de la aplicación.
 
----
-
-## Preguntas que Debe Responder una Auditoría
-
-Durante el análisis intentamos responder las siguientes preguntas:
-
-1. ¿Qué entrada controla el usuario?
-2. ¿La aplicación refleja esa entrada?
-3. ¿El navegador interpreta HTML?
-4. ¿Dónde ocurre la interpretación?
-5. ¿Qué devuelve el servidor?
-6. ¿El DOM fue modificado?
-7. ¿Existe impacto real?
-8. ¿La vulnerabilidad ocurre en frontend o backend?
-
-Responder estas preguntas permitió llegar a una conclusión basada en evidencias y no únicamente en observaciones visuales.
-
----
-
-## Conclusión General del Laboratorio
-
-Durante el laboratorio se analizaron dos comportamientos diferentes dentro de OWASP Juice Shop.
-
-En el buscador se observó que contenido HTML controlado por el usuario era interpretado por el navegador y convertido en elementos reales dentro del DOM. El análisis de las respuestas HTTP mostró que el servidor únicamente devolvía JSON, mientras que DevTools confirmó la creación de nuevos elementos HTML. Estas evidencias permitieron concluir la existencia de una vulnerabilidad de DOM-Based HTML Injection ubicada en el frontend.
-
-Por otra parte, el sistema de reseñas almacenaba y devolvía contenido HTML, pero este era tratado como texto y no era interpretado por el navegador. Por tanto, no se identificó HTML Injection en dicha funcionalidad.
-
-La combinación de observación visual, análisis HTTP e inspección del DOM permitió demostrar técnicamente dónde ocurría la vulnerabilidad y diferenciar correctamente entre almacenar HTML e interpretarlo.
-
+Como contraste, el sistema de reseñas almacenaba y mostraba etiquetas HTML como texto plano, por lo que no se identificó HTML Injection en dicha funcionalidad.
