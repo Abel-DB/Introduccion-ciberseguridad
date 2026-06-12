@@ -16,22 +16,41 @@ En la actualidad, personas, empresas y gobiernos dependen de infraestructuras di
 
 Ejemplos:
 
-- Banca en línea
-- Redes sociales
-- Comercio electrónico
-- Servicios en la nube
-- Sistemas hospitalarios
-- Infraestructura crítica
-- Universidades y plataformas educativas
+* Banca en línea
+* Redes sociales
+* Comercio electrónico
+* Servicios en la nube
+* Sistemas hospitalarios
+* Infraestructura crítica
+* Universidades y plataformas educativas
 
 Un fallo de seguridad puede provocar:
 
-- Robo de información
-- Pérdidas económicas
-- Daño reputacional
-- Interrupción de servicios
-- Fraude digital
-- Extorsión mediante ransomware
+* Robo de información
+* Pérdidas económicas
+* Daño reputacional
+* Interrupción de servicios
+* Fraude digital
+* Extorsión mediante ransomware
+
+---
+
+## Activos Digitales
+
+En ciberseguridad, un activo es cualquier elemento que posee valor para una persona u organización y que debe ser protegido.
+
+Ejemplos:
+
+* Información
+* Bases de datos
+* Servidores
+* Equipos informáticos
+* Redes
+* Aplicaciones
+* Credenciales
+* Servicios digitales
+
+La protección de estos activos es uno de los objetivos principales de la ciberseguridad.
 
 ---
 
@@ -39,37 +58,58 @@ Un fallo de seguridad puede provocar:
 
 La ciberseguridad busca proteger los activos digitales mediante tres objetivos fundamentales:
 
-- **Confidencialidad:** solo usuarios autorizados acceden a la información.
-- **Integridad:** los datos no deben ser alterados sin autorización.
-- **Disponibilidad:** sistemas y datos accesibles cuando se necesiten.
+* **Confidencialidad:** solo usuarios autorizados acceden a la información.
+* **Integridad:** los datos no deben ser alterados sin autorización.
+* **Disponibilidad:** sistemas y datos accesibles cuando se necesiten.
 
 Estos principios forman la conocida **Triada CIA**.
+
+---
+
+## Conceptos Clave
+
+Al estudiar ciberseguridad aparecerán frecuentemente los siguientes conceptos:
+
+* Activo
+* Amenaza
+* Vulnerabilidad
+* Riesgo
+* Control de seguridad
+* Incidente
+* Ataque
+
+Estos conceptos constituyen la base para comprender cómo proteger sistemas e información.
 
 ---
 
 ## Tipos de Amenazas Comunes
 
 ### Malware
+
 Software malicioso diseñado para dañar o comprometer sistemas.
 
 Ejemplos:
 
-- Virus
-- Gusanos
-- Troyanos
-- Spyware
-- Ransomware
+* Virus
+* Gusanos
+* Troyanos
+* Spyware
+* Ransomware
 
 ### Phishing
+
 Suplantación de identidad mediante correos, mensajes o páginas falsas para robar credenciales.
 
 ### Fuerza Bruta
+
 Intentos repetitivos para adivinar contraseñas.
 
 ### Ataques DoS / DDoS
+
 Saturación de servicios para dejarlos fuera de funcionamiento.
 
 ### Ingeniería Social
+
 Manipulación psicológica para obtener acceso o información sensible.
 
 ---
@@ -77,21 +117,27 @@ Manipulación psicológica para obtener acceso o información sensible.
 ## Áreas de la Ciberseguridad
 
 ### Seguridad de Redes
+
 Protección del tráfico, routers, switches y comunicaciones.
 
 ### Seguridad de Sistemas
+
 Protección de servidores, equipos y sistemas operativos.
 
 ### Seguridad de Aplicaciones
+
 Búsqueda y corrección de vulnerabilidades en software.
 
 ### Seguridad Ofensiva / Pentesting
+
 Pruebas autorizadas para detectar fallos antes que un atacante real.
 
 ### Seguridad Defensiva
+
 Monitoreo, detección y respuesta ante incidentes.
 
 ### Seguridad en la Nube
+
 Protección de servicios como AWS, Azure o Google Cloud.
 
 ---
@@ -100,14 +146,14 @@ Protección de servicios como AWS, Azure o Google Cloud.
 
 Buenas prácticas esenciales:
 
-- Uso de contraseñas robustas
-- Autenticación multifactor (MFA)
-- Actualizaciones periódicas
-- Copias de seguridad
-- Antivirus / EDR
-- Firewalls
-- Capacitación contra phishing
-- Principio de mínimo privilegio
+* Uso de contraseñas robustas
+* Autenticación multifactor (MFA)
+* Actualizaciones periódicas
+* Copias de seguridad
+* Antivirus / EDR
+* Firewalls
+* Capacitación contra phishing
+* Principio de mínimo privilegio
 
 ---
 
@@ -117,9 +163,9 @@ Un usuario recibe un correo falso del banco solicitando verificar su cuenta.
 
 Si introduce sus credenciales en una web falsa:
 
-- El atacante roba usuario y contraseña.
-- Puede acceder a la cuenta bancaria.
-- Podría realizar fraudes.
+* El atacante roba usuario y contraseña.
+* Puede acceder a la cuenta bancaria.
+* Podría realizar fraudes.
 
 La ciberseguridad previene esto mediante filtros, educación y autenticación adicional.
 
@@ -129,11 +175,11 @@ La ciberseguridad previene esto mediante filtros, educación y autenticación ad
 
 Todo profesional de informática debe comprender ciberseguridad porque cualquier sistema desarrollado necesita:
 
-- Protección de datos
-- Diseño seguro
-- Gestión de riesgos
-- Respuesta ante incidentes
-- Cumplimiento legal
+* Protección de datos
+* Diseño seguro
+* Gestión de riesgos
+* Respuesta ante incidentes
+* Cumplimiento legal
 
 La seguridad ya no es opcional; forma parte del desarrollo tecnológico moderno.
 

@@ -1,222 +1,228 @@
-# Riesgos y Amenazas en Ciberseguridad
+# Riesgos, Amenazas y Vulnerabilidades
 
 ## Introducción
 
-En ciberseguridad, proteger un sistema no consiste solo en instalar herramientas, sino en comprender qué puede fallar, quién puede atacar y qué impacto tendría un incidente.
+En ciberseguridad, proteger un sistema no consiste únicamente en instalar herramientas de seguridad. También es necesario comprender qué puede fallar, quién puede atacar y qué consecuencias tendría un incidente.
 
-Por ello, dos conceptos fundamentales son:
+Por ello, tres conceptos fundamentales son:
 
-- **Amenaza**
-- **Riesgo**
+* Amenaza
+* Vulnerabilidad
+* Riesgo
 
-Aunque suelen confundirse, no significan lo mismo.
+Estos conceptos permiten identificar problemas de seguridad y tomar decisiones para reducir su impacto.
 
 ---
 
-# 1. ¿Qué es una Amenaza?
+## ¿Qué es una Amenaza?
 
-## Definición
+### Definición
 
 Una **amenaza** es cualquier evento, actor o circunstancia con capacidad de causar daño a un sistema, red, aplicación o información.
 
-La amenaza representa el peligro potencial.
+La amenaza representa un peligro potencial.
 
-## Ejemplos de amenazas
+### Ejemplos de Amenazas
 
-- Hacker malicioso
-- Malware
-- Phishing
-- Robo de dispositivos
-- Incendio en centro de datos
-- Error humano
-- Fallo eléctrico
-- Desastre natural
+* Hacker malicioso
+* Malware
+* Phishing
+* Robo de dispositivos
+* Error humano
+* Fallo eléctrico
+* Incendio en un centro de datos
+* Desastre natural
 
 ---
 
-# 2. ¿Qué es una Vulnerabilidad?
+## ¿Qué es una Vulnerabilidad?
 
-## Definición
+### Definición
 
 Una **vulnerabilidad** es una debilidad o fallo que puede ser aprovechado por una amenaza.
 
-Sin vulnerabilidad, muchas amenazas no tendrían éxito.
+Sin vulnerabilidades, muchas amenazas no tendrían éxito.
 
-## Ejemplos
+### Ejemplos de Vulnerabilidades
 
-- Contraseña débil
-- Software desactualizado
-- Puertos abiertos innecesarios
-- Mala configuración de permisos
-- Falta de copias de seguridad
-- Usuarios sin formación
+* Contraseñas débiles
+* Software desactualizado
+* Puertos abiertos innecesariamente
+* Configuraciones inseguras
+* Falta de copias de seguridad
+* Usuarios sin capacitación
 
 ---
 
-# 3. ¿Qué es un Riesgo?
+## ¿Qué es un Riesgo?
 
-## Definición
+### Definición
 
 El **riesgo** es la probabilidad de que una amenaza aproveche una vulnerabilidad y cause un impacto negativo.
 
-Se relaciona con tres elementos:
+El riesgo surge cuando coinciden:
 
-- Amenaza
-- Vulnerabilidad
-- Impacto
+* Una amenaza
+* Una vulnerabilidad
+* Un posible impacto
 
-## Fórmula conceptual
+### Fórmula Conceptual
 
 Riesgo = Probabilidad × Impacto
 
-## Ejemplo
+### Ejemplo
 
-- Amenaza: phishing
-- Vulnerabilidad: usuario sin formación
-- Impacto: robo de credenciales
+* Amenaza: phishing
+* Vulnerabilidad: usuario sin capacitación
+* Impacto: robo de credenciales
 
 Resultado: riesgo alto.
 
 ---
 
-# 4. Diferencia entre Amenaza, Vulnerabilidad y Riesgo
+## Diferencia entre Amenaza, Vulnerabilidad y Riesgo
 
-| Concepto | Significado | Ejemplo |
-|--------|------------|---------|
-| Amenaza | Algo que puede causar daño | Malware |
-| Vulnerabilidad | Debilidad explotable | Antivirus desactualizado |
-| Riesgo | Posibilidad real de sufrir daño | Infección del equipo |
+| Concepto       | Significado                     | Ejemplo                  |
+| -------------- | ------------------------------- | ------------------------ |
+| Amenaza        | Algo capaz de causar daño       | Malware                  |
+| Vulnerabilidad | Debilidad explotable            | Contraseña débil         |
+| Riesgo         | Posibilidad real de sufrir daño | Compromiso de una cuenta |
 
 ---
 
-# 5. Tipos de Amenazas
+## Tipos de Amenazas
 
-## Amenazas Internas
+### Amenazas Internas
 
 Provienen de personas dentro de la organización.
 
 Ejemplos:
 
-- Empleado descontento
-- Error humano
-- Uso indebido de privilegios
-- Pérdida de información interna
+* Empleados descontentos
+* Errores humanos
+* Uso indebido de privilegios
+* Fuga de información interna
 
-## Amenazas Externas
+### Amenazas Externas
 
 Provienen del exterior.
 
 Ejemplos:
 
-- Ciberdelincuentes
-- Hackers
-- Bots automatizados
-- Campañas de phishing
+* Ciberdelincuentes
+* Hackers
+* Botnets
+* Campañas de phishing
 
-## Amenazas Técnicas
+### Amenazas Técnicas
 
 Relacionadas con fallos tecnológicos.
 
 Ejemplos:
 
-- Caída de servidores
-- Fallos de hardware
-- Vulnerabilidades de software
+* Caídas de servidores
+* Vulnerabilidades de software
+* Errores de configuración
+* Fallos de hardware
 
-## Amenazas Naturales
+### Amenazas Naturales
 
-No intencionales, pero dañinas.
+Eventos no intencionales que afectan la operación.
 
 Ejemplos:
 
-- Incendios
-- Inundaciones
-- Terremotos
-- Cortes eléctricos
+* Incendios
+* Inundaciones
+* Terremotos
+* Cortes eléctricos
 
 ---
 
-# 6. Clasificación del Riesgo
+## Clasificación del Riesgo
 
-Las organizaciones suelen clasificar riesgos según su gravedad.
+### Riesgo Bajo
 
-## Riesgo Bajo
+Impacto reducido y recuperación sencilla.
 
-Impacto reducido y fácil recuperación.
-
-## Riesgo Medio
+### Riesgo Medio
 
 Puede afectar operaciones normales.
 
-## Riesgo Alto
+### Riesgo Alto
 
-Daño importante económico, técnico o reputacional.
+Genera daños importantes a nivel técnico, económico o reputacional.
 
-## Riesgo Crítico
+### Riesgo Crítico
 
-Compromete continuidad del negocio.
+Puede comprometer la continuidad de la organización.
 
 ---
 
-# 7. Gestión de Riesgos
+## Gestión de Riesgos
 
 La gestión de riesgos consiste en identificar, evaluar y tratar riesgos de seguridad.
 
-## Etapas principales
-
-### 1. Identificación
+### Identificación
 
 Detectar activos, amenazas y vulnerabilidades.
 
-### 2. Evaluación
+### Evaluación
 
-Medir probabilidad e impacto.
+Determinar probabilidad e impacto.
 
-### 3. Priorización
+### Priorización
 
-Atender primero riesgos altos o críticos.
+Atender primero los riesgos más importantes.
 
-### 4. Tratamiento
+### Tratamiento
 
-Aplicar controles para reducir riesgo.
+Aplicar controles para reducir el riesgo.
 
-### 5. Revisión continua
+### Revisión Continua
 
-Actualizar análisis periódicamente.
-
----
-
-# 8. Estrategias de Tratamiento del Riesgo
-
-## Mitigar
-
-Reducir probabilidad o impacto.
-
-Ejemplo: instalar MFA.
-
-## Transferir
-
-Pasar parte del riesgo a terceros.
-
-Ejemplo: seguro cibernético.
-
-## Evitar
-
-Eliminar la actividad riesgosa.
-
-Ejemplo: cerrar servicio vulnerable.
-
-## Aceptar
-
-Asumir el riesgo conscientemente.
-
-Ejemplo: riesgo bajo con coste alto de solución.
+Actualizar periódicamente el análisis realizado.
 
 ---
 
-# 9. Ejemplo Práctico
+## Estrategias de Tratamiento del Riesgo
 
-## Caso: Empresa con correos corporativos
+### Mitigar
+
+Reducir la probabilidad o el impacto del riesgo.
+
+Ejemplo:
+
+* Implementar MFA
+* Actualizar sistemas
+* Aplicar controles de acceso
+
+### Evitar
+
+Eliminar la actividad que genera el riesgo.
+
+Ejemplo:
+
+* Desactivar un servicio vulnerable
+
+### Transferir
+
+Trasladar parte del riesgo a terceros.
+
+Ejemplo:
+
+* Contratar un seguro cibernético
+
+### Aceptar
+
+Asumir conscientemente el riesgo cuando su impacto sea reducido o el coste de mitigarlo sea demasiado alto.
+
+---
+
+## Caso Práctico
+
+### Situación
+
+Una empresa utiliza correo electrónico corporativo para todas sus operaciones.
 
 ### Amenaza
 
@@ -224,40 +230,44 @@ Campaña de phishing.
 
 ### Vulnerabilidad
 
-Usuarios sin formación.
+Usuarios sin capacitación en seguridad.
 
 ### Impacto
 
-Robo de acceso al correo y fuga de datos.
+Robo de credenciales y acceso no autorizado a información corporativa.
 
-### Nivel de riesgo
+### Nivel de Riesgo
 
 Alto.
 
-### Mitigación
+### Posibles Medidas de Mitigación
 
-- Formación al personal
-- Filtros anti-spam
-- MFA
-- Simulaciones phishing
-
----
-
-# 10. Importancia en Ciberseguridad
-
-No es posible eliminar todos los riesgos.
-
-El objetivo real es:
-
-- Reducir riesgos críticos
-- Priorizar recursos
-- Mejorar resiliencia
-- Proteger activos más importantes
+* Capacitación de usuarios
+* Filtros antispam
+* Autenticación multifactor
+* Simulaciones de phishing
 
 ---
 
-# Conclusión
+## Relación con la Ciberseguridad
 
-Comprender la diferencia entre amenaza, vulnerabilidad y riesgo es esencial en ciberseguridad.
+La mayoría de controles de seguridad existen para reducir riesgos.
 
-Toda estrategia de seguridad efectiva comienza analizando qué puede ocurrir, qué debilidades existen y cuál sería el impacto si sucede un incidente.
+Ejemplos:
+
+* Firewalls
+* IDS/IPS
+* Antivirus
+* MFA
+* Backups
+* Segmentación de red
+
+Todos ellos buscan disminuir la probabilidad o el impacto de amenazas sobre los activos de una organización.
+
+---
+
+## Conclusión
+
+Comprender la diferencia entre amenazas, vulnerabilidades y riesgos es fundamental para cualquier profesional de ciberseguridad.
+
+La identificación temprana de riesgos y la aplicación de controles adecuados permiten proteger mejor los sistemas, los datos y los servicios frente a incidentes de seguridad.

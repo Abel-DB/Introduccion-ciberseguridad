@@ -1,117 +1,119 @@
-# Triada CIA
+# Tríada CIA
 
 ## Introducción
 
-La **Triada CIA** es uno de los modelos fundamentales de la ciberseguridad. Define los tres principios esenciales que deben protegerse en cualquier sistema de información:
+La **Tríada CIA** es uno de los modelos fundamentales de la ciberseguridad. Define los tres principios esenciales que deben protegerse en cualquier sistema de información:
 
-- **C**onfidentiality (Confidencialidad)
-- **I**ntegrity (Integridad)
-- **A**vailability (Disponibilidad)
+* **C**onfidentiality (Confidencialidad)
+* **I**ntegrity (Integridad)
+* **A**vailability (Disponibilidad)
 
 Estos tres pilares sirven como base para diseñar políticas, controles y estrategias de seguridad.
 
 ---
 
-# 1. Confidencialidad
+## Confidencialidad
 
-## Definición
+### Definición
 
 La **confidencialidad** garantiza que la información solo sea accesible por personas, sistemas o procesos autorizados.
 
 El objetivo es evitar accesos no autorizados, fugas de datos o espionaje.
 
-## Ejemplos
+### Ejemplos
 
-- Acceso a cuentas bancarias mediante contraseña.
-- Documentos internos visibles solo para empleados autorizados.
-- Bases de datos cifradas.
+* Acceso a cuentas bancarias mediante contraseña.
+* Documentos internos visibles solo para empleados autorizados.
+* Bases de datos cifradas.
+* Historiales médicos protegidos.
 
-## Mecanismos de protección
+### Mecanismos de Protección
 
-- Contraseñas seguras
-- Autenticación multifactor (MFA)
-- Cifrado de datos
-- Control de accesos
-- Gestión de privilegios
+* Contraseñas seguras
+* Autenticación multifactor (MFA)
+* Cifrado de datos
+* Control de accesos
+* Gestión de privilegios
+* Segmentación de redes
 
-## Riesgos comunes
+### Riesgos Comunes
 
-- Robo de credenciales
-- Phishing
-- Malware espía
-- Fugas internas
-- Ingeniería social
+* Robo de credenciales
+* Phishing
+* Malware espía
+* Fugas internas
+* Ingeniería social
 
 ---
 
-# 2. Integridad
+## Integridad
 
-## Definición
+### Definición
 
 La **integridad** asegura que la información se mantenga correcta, completa y sin modificaciones no autorizadas.
 
 Los datos no deben alterarse accidentalmente ni de forma maliciosa.
 
-## Ejemplos
+### Ejemplos
 
-- Notas académicas sin manipulación.
-- Transferencias bancarias con importes correctos.
-- Archivos descargados sin cambios.
+* Notas académicas sin manipulación.
+* Transferencias bancarias con importes correctos.
+* Archivos descargados sin cambios.
+* Registros empresariales consistentes.
 
-## Mecanismos de protección
+### Mecanismos de Protección
 
-- Hashes criptográficos
-- Firmas digitales
-- Control de versiones
-- Logs de auditoría
-- Permisos de escritura restringidos
+* Hashes criptográficos
+* Firmas digitales
+* Control de versiones
+* Logs de auditoría
+* Permisos de escritura restringidos
 
-## Riesgos comunes
+### Riesgos Comunes
 
-- Manipulación de bases de datos
-- Virus que alteran archivos
-- Errores humanos
-- Corrupción de datos
+* Manipulación de bases de datos
+* Virus que alteran archivos
+* Errores humanos
+* Corrupción de datos
 
 ---
 
-# 3. Disponibilidad
+## Disponibilidad
 
-## Definición
+### Definición
 
 La **disponibilidad** garantiza que los sistemas, servicios y datos estén accesibles cuando sean necesarios.
 
-No basta con proteger datos: también deben poder utilizarse.
+No basta con proteger la información; también debe poder utilizarse.
 
-## Ejemplos
+### Ejemplos
 
-- Página web operativa 24/7.
-- Plataforma universitaria disponible en época de exámenes.
-- Servidor empresarial sin caídas.
+* Página web operativa 24/7.
+* Plataforma educativa disponible durante exámenes.
+* Servidor empresarial sin interrupciones.
+* Servicios de emergencia siempre accesibles.
 
-## Mecanismos de protección
+### Mecanismos de Protección
 
-- Copias de seguridad
-- Redundancia de servidores
-- Balanceo de carga
-- Sistemas UPS / energía auxiliar
-- Planes de recuperación ante desastres
+* Copias de seguridad
+* Redundancia de servidores
+* Balanceo de carga
+* Sistemas UPS
+* Planes de recuperación ante desastres
 
-## Riesgos comunes
+### Riesgos Comunes
 
-- Ataques DoS / DDoS
-- Fallos eléctricos
-- Errores de hardware
-- Caídas de red
-- Desastres naturales
+* Ataques DoS y DDoS
+* Fallos eléctricos
+* Errores de hardware
+* Caídas de red
+* Desastres naturales
 
 ---
 
-# Relación entre los tres pilares
+## Relación entre los Tres Pilares
 
 Los tres principios deben mantenerse equilibrados.
-
-Ejemplo:
 
 Un sistema extremadamente seguro pero inaccesible falla en disponibilidad.
 
@@ -119,47 +121,59 @@ Un sistema rápido pero sin control de acceso falla en confidencialidad.
 
 Un sistema accesible pero manipulable falla en integridad.
 
----
-
-# Ejemplo Práctico
-
-## Plataforma bancaria online
-
-### Confidencialidad
-
-Solo el cliente puede entrar con sus credenciales.
-
-### Integridad
-
-Los saldos y movimientos deben ser exactos.
-
-### Disponibilidad
-
-La banca online debe funcionar cuando el cliente la necesite.
+La seguridad efectiva requiere proteger simultáneamente los tres pilares.
 
 ---
 
-# Importancia en Ciberseguridad
+## Relación con Otros Conceptos
 
-La mayoría de medidas de seguridad buscan proteger uno o varios elementos de la Triada CIA.
+La Tríada CIA sirve como base para comprender gran parte de la ciberseguridad.
+
+* La criptografía ayuda a proteger la confidencialidad.
+* Los hashes y firmas digitales ayudan a mantener la integridad.
+* Los backups y sistemas redundantes contribuyen a la disponibilidad.
+* Los ataques buscan comprometer uno o más de estos principios.
+
+Por esta razón, la mayoría de controles de seguridad pueden relacionarse con alguno de los pilares de la Tríada CIA.
+
+---
+
+## Ejemplo Práctico
+
+### Plataforma Bancaria Online
+
+#### Confidencialidad
+
+Solo el cliente puede acceder a su cuenta mediante credenciales válidas.
+
+#### Integridad
+
+Los saldos, transferencias y movimientos deben mantenerse correctos y sin alteraciones.
+
+#### Disponibilidad
+
+La plataforma debe estar accesible cuando el cliente necesite operar.
+
+---
+
+## Importancia en Ciberseguridad
+
+La mayoría de medidas de seguridad buscan proteger uno o varios elementos de la Tríada CIA.
 
 Ejemplos:
 
-- Firewall → disponibilidad y confidencialidad
-- Cifrado → confidencialidad
-- Backup → disponibilidad
-- Firma digital → integridad
+* Firewall → confidencialidad y disponibilidad
+* Cifrado → confidencialidad
+* Backup → disponibilidad
+* Firma digital → integridad
+* MFA → confidencialidad
+
+Comprender este modelo permite analizar amenazas y diseñar controles de seguridad de manera más efectiva.
 
 ---
 
-# Conclusión
+## Conclusión
 
-La Triada CIA representa la base conceptual de la seguridad informática.
+La Tríada CIA constituye la base conceptual de la ciberseguridad moderna. Sus tres pilares —confidencialidad, integridad y disponibilidad— permiten definir qué debe protegerse y cómo evaluar la efectividad de las medidas de seguridad.
 
-Cualquier organización que gestione información debe proteger:
-
-- La privacidad de los datos
-- La exactitud de la información
-- La continuidad de los servicios
-
-Comprender este modelo es esencial para analizar riesgos y diseñar sistemas seguros.
+Comprender este modelo es fundamental para interpretar riesgos, analizar ataques y aplicar controles adecuados en cualquier entorno tecnológico.
